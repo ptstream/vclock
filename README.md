@@ -55,7 +55,7 @@ Build Nixie needs to install QT5. It has been tested from:
     It has been tested under Raspbian Stretch with desktop on a Raspberry PI3 and using the official 7” screen.
 	
 To test it, some installers are avalaible at: https://drive.google.com/open?id=1-NYaP9FZ8btiqm2BfRxURVEukjmCO6SI
-Please read user-manual.pdf before installing Nixie.
+Please see user-manual.pdf before installing Nixie.
 
 
 
