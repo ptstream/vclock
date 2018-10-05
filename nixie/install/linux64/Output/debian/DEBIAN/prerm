@@ -1,0 +1,5 @@
+echo "\n  The user folders /home/*/.local/share/nixie containing the local configuration file can be removed."
+echo "  Forder list that can be removed:"
+ls -d /home/*/.local/share/nixie
+echo "\n"
+

@@ -1,0 +1,11 @@
+{
+  "Name" : "ip_api_com",
+  "Version" : "0.0.0",
+  "InterfaceVersion" : "0.0.0",
+  "Vendor" : "vclock",
+  "Category" : "Location from IP address",
+  "System" : "*",
+  "Description" : [
+    "This plugin returns the town and country from ip_api.com."
+    ]
+}

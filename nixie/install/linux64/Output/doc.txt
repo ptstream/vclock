@@ -1,0 +1,14 @@
+Install package
+  sudo dpkg -i nixie-0.0.0.deb
+  
+Uninstall package
+  sudo apt-get remove nixie
+  
+Executable directory: /usr/bin/nixie
+Data directory: /home/$USER/.local/share/nixie
+nixie.desktop file: /usr/share/applications/
+
+In case of problem : 
+    backup file /var/lib/dpkg/status
+    edit /var/lib/dpkg/status (warning lines length)
+    remove nixie block.

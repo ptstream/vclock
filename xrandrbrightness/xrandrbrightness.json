@@ -1,0 +1,11 @@
+{
+  "Name" : "xrandrbrightness",
+  "Version" : "0.0.0",
+  "InterfaceVersion" : "0.0.0",
+  "Vendor" : "vclock",
+  "Category" : "Hardware brightness",
+  "System" : "Linux",
+  "Description" : [
+    "This plugin manages the brightness of the backlight screen."
+    ]
+}

@@ -1,0 +1,12 @@
+#ifndef SHOUTCAST_GLOBAL_HPP
+#define SHOUTCAST_GLOBAL_HPP
+
+#include <QtCore/qglobal.h>
+
+#if defined(SHOUTCAST_LIBRARY)
+#  define SHOUTCASTSHARED_EXPORT Q_DECL_EXPORT
+#else
+#  define SHOUTCASTSHARED_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // SHOUTCAST_GLOBAL_HPP

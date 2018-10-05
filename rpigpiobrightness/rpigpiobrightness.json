@@ -1,0 +1,11 @@
+{
+  "Name" : "rpigpiobrightness",
+  "Version" : "0.0.0",
+  "InterfaceVersion" : "0.0.0",
+  "Vendor" : "vclock",
+  "Category" : "Brightness",
+  "System" : "*",
+  "Description" : [
+    "This plugin returns the state of a gpio pin."
+    ]
+}

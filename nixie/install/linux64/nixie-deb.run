@@ -1,0 +1,2 @@
+export LD_LIBRARY_PATH=/usr/bin/nixie/lib:$LD_LIBRARY_PATH
+/usr/bin/nixie/nixie

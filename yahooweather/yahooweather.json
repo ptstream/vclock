@@ -1,0 +1,11 @@
+{
+  "Name" : "yahooweather",
+  "Version" : "0.0.0",
+  "InterfaceVersion" : "0.0.0",
+  "Vendor" : "vclock",
+  "Category" : "Weather provider",
+  "System" : "*",
+  "Description" : [
+    "This plugin manages the weather structures from Yahoo weather provider."
+    ]
+}

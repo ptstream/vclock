@@ -1,0 +1,13 @@
+                  Raspberry PI3 installation
+  
+* Intall the package:
+  sudo dpkg -i nixie-<version>.deb
+  (e.g.sudo dpkg -i nixie-0.0.0.deb)
+
+An entry is created in your Utilities menu.
+
+Your can install manually in any folder by using the nixie-<version>.zip file.
+
+* Unstall the package
+  sudo apt-get remove nixie
+  

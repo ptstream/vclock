@@ -1,0 +1,9 @@
+*.pro.user
+*.qm
+*.bak
+*.deb
+*.zip
+nixie/install/linux64/Output/debian/usr/bin/nixie
+nixie/install/win32/build
+nixie/install/win32/Output/*.exe
+nixie/install/pi32/Output/debian/usr/bin/nixie

@@ -1,0 +1,11 @@
+{
+  "Name" : "rpiblbrightness",
+  "Version" : "0.0.0",
+  "InterfaceVersion" : "0.0.0",
+  "Vendor" : "vclock",
+  "Category" : "Hardware brightness",
+  "System" : "Raspbian",
+  "Description" : [
+    "This plugin manages the brightness of the backlight raspberry pi official screen."
+    ]
+}

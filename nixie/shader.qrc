@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>config/bkgnd.frag</file>
+        <file>config/bkgnd.vert</file>
+        <file>config/bulb.frag</file>
+        <file>config/bulb.vert</file>
+    </qresource>
+</RCC>

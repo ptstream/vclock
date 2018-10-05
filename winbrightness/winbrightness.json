@@ -1,0 +1,11 @@
+{
+  "Name" : "winbrightness",
+  "Version" : "0.0.0",
+  "InterfaceVersion" : "0.0.0",
+  "Vendor" : "vclock",
+  "Category" : "Hardware brightness",
+  "System" : "Windows",
+  "Description" : [
+    "This plugin manages the brightness of the backlight Windows screen."
+    ]
+}

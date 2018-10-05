@@ -1,0 +1,12 @@
+#ifndef DS18B20_GLOBAL_HPP
+#define DS18B20_GLOBAL_HPP
+
+#include <QtCore/qglobal.h>
+
+#if defined(DS18B20_LIBRARY)
+#  define DS18B20SHARED_EXPORT Q_DECL_EXPORT
+#else
+#  define DS18B20SHARED_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // DS18B20_GLOBAL_HPP

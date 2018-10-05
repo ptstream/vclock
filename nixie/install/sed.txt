@@ -1,0 +1,7 @@
+ Linux
+ sed -e 's/# title=true/title=false/g' < $PRODUCT.ini > $PRODUCT.tmp
+ 
+ 
+ Windows
+ get-content nixie.ini | %{$_ -replace "# brightness=rpiblbrightness","brightness=winbrightness"} >n
+.ini

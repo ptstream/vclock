@@ -1,0 +1,11 @@
+{
+  "Name" : "shoucast",
+  "Version" : "0.0.0",
+  "InterfaceVersion" : "0.0.0",
+  "Vendor" : "vclock",
+  "Category" : "Web radio manager",
+  "System" : "*",
+  "Description" : [
+    "This plugin manages the web radios from Shoutcast provider."
+    ]
+}

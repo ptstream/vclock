@@ -1,0 +1,11 @@
+{
+  "Name" : "ds18b20",
+  "Version" : "0.0.0",
+  "InterfaceVersion" : "0.0.0",
+  "Vendor" : "vclock",
+  "Category" : "External IP address",
+  "System" : "*",
+  "Description" : [
+    "This plugin returns the temperature from a ds18b20 1wire sensor."
+    ]
+}

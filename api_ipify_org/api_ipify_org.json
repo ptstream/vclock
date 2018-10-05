@@ -1,0 +1,11 @@
+{
+  "Name" : "api_ipify_org",
+  "Version" : "0.0.0",
+  "InterfaceVersion" : "0.0.0",
+  "Vendor" : "vclock",
+  "Category" : "External IP address",
+  "System" : "*",
+  "Description" : [
+    "This plugin returns the address from the outside of the router."
+    ]
+}

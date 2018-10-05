@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Version=0.0.0
+Name=Nixie
+GenericName=Nixie
+Exec=/usr/bin/nixie/nixie.run
+Comment=Virtual Nixie Clock
+Icon=/usr/bin/nixie/nixie48.png
+Terminal=false
+Categories=Utility
+
