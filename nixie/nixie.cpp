@@ -114,7 +114,7 @@ void CNixie::initializeDefaultLightings ()
 
   m_defaultLightings[PTop].m_light        = QVector3D (0.04f, 0.04f, 0.04f);
   m_defaultLightings[PTop].m_specular     = QVector3D (2.0f, 2.0f, 2.0f);
-  m_defaultLightings[PTop].m_surfaceColor = QVector3D (0.02, 0.02f, 0.02f);
+  m_defaultLightings[PTop].m_surfaceColor = QVector3D (0.02f, 0.02f, 0.02f);
   m_defaultLightings[PTop].m_shininess    = 20.0f;
   m_defaultLightings[PTop].m_alpha        = 1.0f;
 
@@ -393,7 +393,7 @@ void CNixie::allocateVbo ()
   if (!mesh.isEmpty ())
   {
     m_cVertices[i] = mesh.size () / 6;
-    int size       = byteSize (m_cVertices[i]);
+    int size       = static_cast<int>(byteSize (m_cVertices[i]));
     m_vbos[i].bind ();
     m_vbos[i].allocate (size);
     m_vbos[i].write (0, mesh.constData (), size);
@@ -431,7 +431,7 @@ void CNixie::allocateVbo ()
       if (!mesh.isEmpty ())
       {
         m_cVertices[i] = mesh.size () / 6;
-        int size       = byteSize (m_cVertices[i]);
+        int size       = static_cast<int>(byteSize (m_cVertices[i]));
         m_vbos[i].bind ();
         m_vbos[i].allocate (size);
         m_vbos[i].write (0, mesh.constData (), size);
@@ -460,10 +460,10 @@ void CNixie::initializeGL ()
     setType (CMode::Clock);
   }
 
-  connect (context (), &QOpenGLContext::aboutToBeDestroyed, this, &CNixie::cleanup);
+//  connect (context (), &QOpenGLContext::aboutToBeDestroyed, this, &CNixie::cleanup);
 
   initializeOpenGLFunctions ();
-  glClearColor (m_bkgndUniformColor.redF (), m_bkgndUniformColor.greenF (), m_bkgndUniformColor.blueF (), 1);
+  glClearColor (static_cast<float>(m_bkgndUniformColor.redF ()), static_cast<float>(m_bkgndUniformColor.greenF ()), static_cast<float>(m_bkgndUniformColor.blueF ()), 1.0f);
   setTexture (TBackground, m_bkgndTexture);
   setTexture (TAbout, m_aboutTexture);
   setTexture (TTable, m_tableTexture);
@@ -646,7 +646,7 @@ void CNixie::setupVertexAttribs ()
   QOpenGLFunctions *f = QOpenGLContext::currentContext ()->functions();
   f->glEnableVertexAttribArray (PROGRAM_VERTEX_ATTRIBUTE);
   f->glEnableVertexAttribArray (PROGRAM_NORMAL_ATTRIBUTE);
-  f->glVertexAttribPointer (PROGRAM_VERTEX_ATTRIBUTE, 3, GL_FLOAT, GL_FALSE, 6 * sizeof (GLfloat), 0);
+  f->glVertexAttribPointer (PROGRAM_VERTEX_ATTRIBUTE, 3, GL_FLOAT, GL_FALSE, 6 * sizeof (GLfloat), nullptr);
   f->glVertexAttribPointer (PROGRAM_NORMAL_ATTRIBUTE, 3, GL_FLOAT, GL_FALSE, 6 * sizeof (GLfloat), reinterpret_cast<void *>(offset));
 }
 
@@ -709,7 +709,7 @@ void CNixie::mouseMoveEvent (QMouseEvent* event)
   {
     int dx = x - m_lastPos.x ();
     int dy = y - m_lastPos.y ();
-    int b  = event->buttons ();
+    unsigned b  = event->buttons ();
     if ((b & Qt::LeftButton) != 0)
     {
       setRotation(m_xRot + 8 * dy, m_xRot);
