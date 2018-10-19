@@ -13,7 +13,7 @@ DEVEL=/home/pi/Devel
 OUTPUT=$DEVEL/$FOLDER/$PRODUCT/install/pi32/Output
 TARGET=$OUTPUT/debian/usr/bin/$PRODUCT
 BINARIES=/home/pi/Devel/build-$FOLDER-Desktop-Release
-VERSION=0.0.0
+VERSION=0.0.1
 
 if [ -d $TARGET ]
 then

@@ -11,7 +11,7 @@ DEVEL=/home/$USER/Documents/Development
 OUTPUT=$DEVEL/$FOLDER/$PRODUCT/install/linux64/Output
 TARGET=$OUTPUT/debian/usr/bin/$PRODUCT
 BINARIES=/home/$USER/Documents/Development/build-$FOLDER-Desktop_Qt_5_8_0_GCC_64bit-Release
-VERSION=0.0.0
+VERSION=0.0.1
 
 if [ -d $TARGET ]
 then
