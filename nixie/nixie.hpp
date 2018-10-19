@@ -171,7 +171,7 @@ public:
   CNixie (QWidget* parent = nullptr);
 
   /*! Destructor. */
-  ~CNixie ();
+  virtual ~CNixie () override;
 
   // Display
   /*! Returns the current display type. */
@@ -529,22 +529,22 @@ protected:
   void setTexture (ETexture index, QString name);
 
   /*! Draw mesh. Use for refractoring. */
-  inline void drawArrays (EMesh mesh, GLint mode = GL_TRIANGLES);
+  inline void drawArrays (EMesh mesh, GLenum mode = GL_TRIANGLES);
 
   /*! Draw mesh. Use for refractoring. */
-  inline void drawArrays (EMesh mesh, int start, int count, GLint mode = GL_TRIANGLES);
+  inline void drawArrays (EMesh mesh, int start, int count, GLenum mode = GL_TRIANGLES);
 
   /*! Updates openGL matrices. Use for refractoring. */
   inline void updateMatrix ();
 
   /*! Updates openGL matrices. Use for refractoring. */
-  inline void updateMatrixAndDraw (EMesh mesh, GLint mode = GL_TRIANGLES);
+  inline void updateMatrixAndDraw (EMesh mesh, GLenum mode = GL_TRIANGLES);
 
   /*! Updates openGL matrices. Use for refractoring. */
-  inline void updateMatrixAndDraw (EMesh mesh, float dx, float dy, float dz, GLint mode = GL_TRIANGLES);
+  inline void updateMatrixAndDraw (EMesh mesh, float dx, float dy, float dz, GLenum mode = GL_TRIANGLES);
 
   /*! Returns openGL vertex attributes size in bytes. */
-  static int byteSize (int cVertices) { return cVertices * sizeof(GLfloat) * 6; }
+  static unsigned byteSize (unsigned cVertices) { return cVertices * sizeof(GLfloat) * 6; }
 
   /*! Returns the background rectangle. */
   static QVector<GLfloat> rectangle ();
@@ -552,7 +552,7 @@ protected:
 private :
   EDisplay m_display = Nixie; //!< Display type (nixie, text, LCD, Leds).
   CMode* m_mode = nullptr; //!< Current mode (Clock, Thermometer...
-  QVector3D m_primaryColor = QVector3D (1.0f, 0.54f, 0.1);
+  QVector3D m_primaryColor = QVector3D (1.0f, 0.54f, 0.1f);
   QColor m_bkgndUniformColor = Qt::black; //!< Uniform background color.
   QString m_bkgndTexture; //!< Background texture file.
   QString m_aboutTexture; //!< About tag texture file.
@@ -677,12 +677,12 @@ private :
                        PCSepBase;
 };
 
-void CNixie::drawArrays (EMesh mesh, GLint mode)
+void CNixie::drawArrays (EMesh mesh, GLenum mode)
 {
   drawArrays (mesh, 0, m_cVertices[mesh], mode);
 }
 
-void CNixie::drawArrays (EMesh mesh, int start, int count, GLint mode)
+void CNixie::drawArrays (EMesh mesh, int start, int count, GLenum mode)
 {
   if (count > 0 && m_validVbos[mesh] && m_vbos[mesh].bind ())
   {
@@ -699,13 +699,13 @@ void CNixie::updateMatrix ()
   m_nixieProgram->setUniformValue (m_uVLocs.m_normalMatrix, normalMatrix);
 }
 
-void CNixie::updateMatrixAndDraw (EMesh mesh, GLint mode)
+void CNixie::updateMatrixAndDraw (EMesh mesh, GLenum mode)
 {
   updateMatrix ();
   drawArrays (mesh, mode);
 }
 
-void CNixie::updateMatrixAndDraw (EMesh mesh, float dx, float dy, float dz, GLint mode)
+void CNixie::updateMatrixAndDraw (EMesh mesh, float dx, float dy, float dz, GLenum mode)
 {
   m_world.translate (dx, dy, dz);
   updateMatrix ();

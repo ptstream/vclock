@@ -98,7 +98,7 @@ QString CAlarmManager::daysToString (CAlarm const * alarm) const
 {
   QString      days;
   QToolButton* btns[] = { ui->m_d1, ui->m_d2, ui->m_d3, ui->m_d4, ui->m_d5, ui->m_d6, ui->m_d7 };
-  for (int iDay = 0; iDay < 7; ++iDay)
+  for (unsigned iDay = 0; iDay < 7; ++iDay)
   {
     if (alarm->isEnabledFor (iDay + 1))
     {

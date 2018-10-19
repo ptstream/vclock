@@ -14,6 +14,7 @@
 #include <QDir>
 #include <QDesktopWidget>
 #include <QDateTime>
+#include <QScreen>
 
 struct SConfigTubes
 {
@@ -30,7 +31,7 @@ struct SConfigTubes
   QString           m_diaporamaDir           = "$exe$/diaporama";
   CDiaporama::EMode m_diaporamaMode          = CDiaporama::FullImage;
   int               m_diaporamaInterval      = 4000; // seconds
-  unsigned          m_partCode               = 0xffffffff & (~CNixie::PCTable) & (~CNixie::PCPencil);
+  unsigned          m_partCode               = 0xffffffff & static_cast<unsigned>((~CNixie::PCTable) & (~CNixie::PCPencil));
   bool              m_forceBackgroungUniform = false;
   QString           m_fontFamily;
   float             m_menuFontCoef = 1.6f;
@@ -52,18 +53,18 @@ struct SConfigClock
 
 struct SConfigPositions
 {
-  QVector3D m_motionIncs     = QVector3D (0.002, 0.002, 0.002);
-  QVector3D m_motionMin      = QVector3D (-0.1, -0.1, -0.5);
-  QVector3D m_motionMax      = QVector3D (0.1, 0.1, 0.3);
+  QVector3D m_motionIncs     = QVector3D (0.002f, 0.002f, 0.002f);
+  QVector3D m_motionMin      = QVector3D (-0.1f, -0.1f, -0.5f);
+  QVector3D m_motionMax      = QVector3D (0.1f, 0.1f, 0.3f);
   int       m_motionInterval = 0;
   bool      m_motion         = false;
   QVector3D m_ps[7][6]       = { {},
                                  {},
                                  {},
-                                 { QVector3D (-1.4, 0, 0), QVector3D (-0.14, 0, 0), QVector3D (1.4, 0, 0) },
-                                 { QVector3D (-2.0, 0, 0), QVector3D (-0.8, 0, 0), QVector3D (0.8, 0, 0), QVector3D (2.0, 0, 0) },
+                                 { QVector3D (-1.4f, 0.0f, 0.0f), QVector3D (-0.14f, 0.0f, 0.0f), QVector3D (1.4f, 0.0f, 0.0f) },
+                                 { QVector3D (-2.0f, 0.0f, 0.0f), QVector3D (-0.8f, 0.0f, 0.0f), QVector3D (0.8f, 0.0f, 0.0f), QVector3D (2.0f, 0.0f, 0.0f) },
                                  {},
-                                 { QVector3D (-3.2, 0, 0), QVector3D (-2.0, 0, 0), QVector3D (-0.6, 0, 0), QVector3D (0.6, 0, 0), QVector3D (2.0, 0, 0), QVector3D (3.2, 0, 0) }
+                                 { QVector3D (-3.2f, 0.0f, 0.0f), QVector3D (-2.0f, 0.0f, 0.0f), QVector3D (-0.6f, 0.0f, 0.0f), QVector3D (0.6f, 0.0f, 0.0f), QVector3D (2.0f, 0.0f, 0.0f), QVector3D (3.2f, 0.0f, 0.0f) }
                                };
 };
 
@@ -91,8 +92,8 @@ struct SConfigWebradios
 
 struct SConfigAlarms
 {
-  int            m_repeat     = 3;
-  int            m_interval   = 10; // mn
+  unsigned       m_repeat     = 3u;
+  unsigned       m_interval   = 10u; // mn
   QString        m_ringtone   = "$exe$/ringtones/1.mp3";
   int            m_volumeMin  = 20;
   int            m_volumeMax  = 80;
@@ -148,11 +149,11 @@ static unsigned decodePartCode (QString const & s)
         switch (it - parts.begin ())
         {
           case 0 :
-            partCode &= ~CNixie::PCTable;
+            partCode &= static_cast<unsigned>(~CNixie::PCTable);
             break;
 
           case 1 :
-            partCode &= ~CNixie::PCPencil;
+            partCode &= static_cast<unsigned>(~CNixie::PCPencil);
             break;
         }
       }
@@ -603,7 +604,7 @@ void CMainWindow::applyConfig ()
 
   ui->m_device->setDiaporamaMode (tubes.m_diaporamaMode);
   ui->m_device->setDiaporamaInterval (tubes.m_diaporamaInterval);
-  ui->m_device->setPartCode (tubes.m_partCode);
+  ui->m_device->setPartCode (static_cast<int>(tubes.m_partCode));
   if (tubes.m_forceBackgroungUniform)
   {
     forceReleaseBackgroungUniform ();
@@ -644,9 +645,9 @@ void CMainWindow::applyConfig ()
   ui->m_date->setHidden (!clock.m_date);
   CAlarm::setDateFormat (clock.m_format);
 
-  for (unsigned index : { 3, 4, 6 })
+  for (int index : { 3, 4, 6 })
   {
-    for (unsigned j = 0; j < index; ++j)
+    for (int j = 0; j < index; ++j)
     {
       ui->m_device->addPos (index, positions.m_ps[index][j]);
     }
@@ -821,29 +822,37 @@ void CMainWindow::openGLConfig (SOpenGlParams& params)
      params.m_maxWindowSize = true;
   }
 
-  QString   fileName = QDir (applicationFolder ()).absoluteFilePath ("nixie.ini");
-  QSettings config (fileName, QSettings::IniFormat);
-
-  QString value;
-  config.beginGroup ("opengl");
-  keyValue (config, params.m_samples, "samples");
-  keyValue (config, params.m_depthBufferSize, "depthBufferSize");
-  keyValue (config, params.m_showTitle, "title");
-  if (keyValue (config, value, "size"))
+  QStringList iniFiles;
+  iniFiles << QDir (applicationFolder ()).absoluteFilePath ("nixie.ini");
+  iniFiles << QDir (appDataLocation ()).absoluteFilePath ("nixie.ini");
+  for (QString const & iniFile : iniFiles)
   {
-    params.m_maxWindowSize = value.toLower () == "max";
-  }
+    if (QFile::exists (iniFile))
+    {
+      QSettings config (iniFile, QSettings::IniFormat);
 
-  if (keyValue (config, value, "geometry"))
-  {
-    QTextStream reader (&value, QIODevice::ReadOnly);
-    int         l, t, w, h, s;
-    reader >> l >> t >> w >> h >> s;
-    params.m_rc = QRect (l, t, w, h);
-    params.m_ws = static_cast<Qt::WindowStates>(s);
-  }
+      QString value;
+      config.beginGroup ("opengl");
+      keyValue (config, params.m_samples, "samples");
+      keyValue (config, params.m_depthBufferSize, "depthBufferSize");
+      keyValue (config, params.m_showTitle, "title");
+      if (keyValue (config, value, "size"))
+      {
+        params.m_maxWindowSize = value.toLower () == "max";
+      }
 
-  config.endGroup ();
+      if (keyValue (config, value, "geometry"))
+      {
+        QTextStream reader (&value, QIODevice::ReadOnly);
+        int         l, t, w, h, s;
+        reader >> l >> t >> w >> h >> s;
+        params.m_rc = QRect (l, t, w, h);
+        params.m_ws = static_cast<Qt::WindowStates>(s);
+      }
+
+      config.endGroup ();
+    }
+  }
 }
 
 void CMainWindow::saveConfig ()
@@ -965,7 +974,7 @@ void CMainWindow::restoreGeometry (QRect const & rc, Qt::WindowStates ws)
   if (rc.isValid ())
   {
     QRect wRect = rc;
-    QRect sRect = QApplication::desktop ()->screenGeometry ();
+    QRect sRect = QGuiApplication::primaryScreen ()->availableGeometry (); //QApplication::desktop ()->screenGeometry ();
     int   dx   = 0, dy = 0;
     if (wRect.right () > sRect.right ())
     {

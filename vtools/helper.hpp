@@ -3,6 +3,7 @@
 
 #include "vtools_globals.h"
 #include <QPixmap>
+#include <cmath>
 
 class QSettings;
 class QNetworkAccessManager;
@@ -47,5 +48,8 @@ bool VTOOLSSHARED_EXPORT touchScreenActivated ();
 
 /*! Returns identifier of the first DS18B20 detected on the Raspberry. */
 QByteArray VTOOLSSHARED_EXPORT ds18b20Detection ();
+
+/*! Returns true if the arguments are approximatly equal. */
+inline bool fEqual (float f1, float f2, float eps = 0.0001f) { return std::fabs (f1 - f2) < eps; }
 
 #endif // HELPER_HPP

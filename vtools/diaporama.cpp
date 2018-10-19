@@ -30,12 +30,12 @@ void CDiaporama::run ()
   {
     if (m_mode == FullImage)
     {
-      rc = QRect (0, -0.5f * (wh - ih), iw, wh);
+      rc = QRect (0, static_cast<int>(-0.5f * (wh - ih)), static_cast<int>(iw), static_cast<int>(wh));
     }
     else
     { // CropImage
-      int dx = iw * (1.0f - ih / wh);
-      rc     = QRect (0.5f * dx, 0, iw - dx, ih);
+      int dx = static_cast<int>(iw * (1.0f - ih / wh));
+      rc     = QRect (dx / 2, 0, static_cast<int>(iw - dx), static_cast<int>(ih));
     }
   }
   else
@@ -45,12 +45,12 @@ void CDiaporama::run ()
     {
       if (m_mode == FullImage)
       {
-        rc = QRect (-0.5f * (ww - iw), 0, ww, wh);
+        rc = QRect (-static_cast<int>(ww - iw) / 2, 0, static_cast<int>(ww), static_cast<int>(wh));
       }
       else
       { // CropImage
-        int dy = ih * (1.0f - iw / ww);
-        rc     = QRect (0, 0.5f * dy, iw, ih - dy);
+        int dy = static_cast<int>(ih * (1.0f - iw / ww));
+        rc     = QRect (0, dy / 2, static_cast<int>(iw), static_cast<int>(ih - dy));
       }
     }
   }
