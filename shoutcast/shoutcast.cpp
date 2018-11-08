@@ -96,11 +96,11 @@ QVector<CGenre> const & CShoutcast::genres (QNetworkAccessManager* nam)
         QJsonObject const & jResponse  = json["response"].toObject ();
         QJsonObject const & jData      = jResponse["data"].toObject ();
         QJsonObject const & jGenreList = jData["genrelist"].toObject ();
-        QJsonArray const &  jGenre     = jGenreList["genre"].toArray ();
-        m_genres.reserve (jGenre.size ());
-        for (QJsonArray::const_iterator it = jGenre.begin (), end = jGenre.end (); it != end; ++it)
+        QJsonArray const &  jGenres    = jGenreList["genre"].toArray ();
+        m_genres.reserve (jGenres.size ());
+        for (QJsonValue const & jGenre : jGenres)
         {
-          QJsonObject const & g    = (*it).toObject ();
+          QJsonObject const & g    = jGenre.toObject ();
           QString             name = ampersandHandler (g["name"].toString ());
           QByteArray          id   = QByteArray::number (g["id"].toInt ());
           CGenre              genre (name, id);
@@ -137,11 +137,11 @@ QVector<CStation> const & CShoutcast::stations (QVariant const & genreId, QNetwo
         QJsonObject const & jResponse    = json["response"].toObject ();
         QJsonObject const & jData        = jResponse["data"].toObject ();
         QJsonObject const & jStationList = jData["stationlist"].toObject ();
-        QJsonArray const &  jStation     = jStationList["station"].toArray ();
-        m_stations.reserve (jStation.size ());
-        for (QJsonArray::const_iterator it = jStation.begin (), end = jStation.end (); it != end; ++it)
+        QJsonArray const &  jStations    = jStationList["station"].toArray ();
+        m_stations.reserve (jStations.size ());
+        for (QJsonValue const & jStation : jStations)
         {
-          QJsonObject const & g    = (*it).toObject ();
+          QJsonObject const & g    = jStation.toObject ();
           QString             name = ampersandHandler (g["name"].toString ());
           if (name.isEmpty ())
           {
@@ -169,7 +169,7 @@ QVector<CStation> const & CShoutcast::stations (QVariant const & genreId, QNetwo
 QVector<CStation> const & CShoutcast::stations (QString const & text, QNetworkAccessManager* nam)
 {
   QString url = QString ("http://api.shoutcast.com/legacy/stationsearch?search=%1&k=%2")
-                .arg (text.toUtf8 ().constData ()).arg(shoutcastKey);
+                .arg (text.toUtf8 ().constData (), shoutcastKey);
   if (m_mp3)
   {
     url += "&mt=audio/mpeg";

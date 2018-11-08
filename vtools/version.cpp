@@ -36,7 +36,7 @@ QByteArray CVersion::toByteArray () const
 void CVersion::fromByteArrayList (QList<QByteArray> const & versions)
 {
   m_values[Major] = m_values[Minor] = m_values[Patch] = 0;
-  for (unsigned i = 0; i < sizeof (m_values) / sizeof (int); ++i)
+  for (int i = 0; i < static_cast<int>(sizeof (m_values) / sizeof (int)); ++i)
   {
     m_values[i] = versions[i].toInt ();
   }
@@ -78,7 +78,7 @@ void CVersion::version (int values[3])
   values[Patch] = m_values[Patch];
 }
 
-void CVersion::setVersion (int values[3])
+void CVersion::setVersion (int const values[3])
 {
   m_values[Major] = values[Major];
   m_values[Minor] = values[Minor];

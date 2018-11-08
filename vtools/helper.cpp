@@ -54,8 +54,8 @@ void VTOOLSSHARED_EXPORT installTranslator (QString locale)
   {
     for (QString const & file : files)
     {
-      QString      path       = dir.absoluteFilePath (file);
-      QTranslator* translator = new QTranslator;
+      QString path       = dir.absoluteFilePath (file);
+      auto    translator = new QTranslator;
       translator->load (path);
       QCoreApplication::installTranslator (translator);
     }

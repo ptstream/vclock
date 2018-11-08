@@ -526,7 +526,7 @@ protected:
   QVector<GLfloat> aboutRectangle ();
 
   /*! Sets the texture name at index. */
-  void setTexture (ETexture index, QString name);
+  void setTexture (ETexture index, QString const & name);
 
   /*! Draw mesh. Use for refractoring. */
   inline void drawArrays (EMesh mesh, GLenum mode = GL_TRIANGLES);

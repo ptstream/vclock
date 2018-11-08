@@ -89,7 +89,7 @@ public :
   void setVersion (EType type, int value) { m_values[type] = value; }
 
   /*! Sets the versions. */
-  void setVersion (int values[3]);
+  void setVersion (int const values[3]);
 
   /*! Sets the versions. */
   void setVersion (int major, int minor = 0, int patch = 0);

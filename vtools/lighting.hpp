@@ -28,7 +28,7 @@ public :
   QVector3D m_light; //!< Light color.
   QVector3D m_specular; //!< Specular color component.
   QVector3D m_surfaceColor; //!< Surface color component.
-  float m_shininess; //!< Surface shininess.
+  float m_shininess = 1.0f; //!< Surface shininess.
   float m_alpha = 1.0f; //!< Transparency.
 };
 

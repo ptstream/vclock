@@ -42,8 +42,8 @@ void CNixie::paintNixieTubes ()
     m_nixieProgram->setUniformValue (m_uVLocs.m_surfaceColor, QVector4D (m_lightings[PDigits].m_surfaceColor, 1.0f));
     for (int i = 0; i < m_cNixieTubes; ++i)
     {
-      EMesh index = static_cast<EMesh>(m_digits[i]);
-      dz          = step * (index - 4.5f);
+      auto index = static_cast<EMesh>(m_digits[i]);
+      dz         = step * (index - 4.5f);
       updateMatrixAndDraw (index, nixiePos[i].x (), nixiePos[i].y (), nixiePos[i].z () + dz);
       m_world = m_worldOrg;
     }
@@ -381,9 +381,9 @@ void CNixie::paintNixieTubes ()
     offsets[1] = QVector2D (dx, dy);
     offsets[2] = QVector2D (dx, dy - removeDim (2.2f));
     offsets[3] = QVector2D (-dx, dy - removeDim (2.2f));
-    for (int i = 0; i < 4; ++i)
+    for (QVector2D const & offset : offsets)
     {
-      updateMatrixAndDraw (MFixTag, offsets[i].x (), offsets[i].y (), dz);
+      updateMatrixAndDraw (MFixTag, offset.x (), offset.y (), dz);
       m_world = m_worldOrg;
     }
   }

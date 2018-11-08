@@ -145,8 +145,8 @@ static unsigned decodePartCode (QString const & s)
       QStringList flags = s.split (' ');
       for (QString const & flag : flags)
       {
-        QStringList::const_iterator it = std::find (parts.begin (), parts.end (), flag);
-        switch (it - parts.begin ())
+        QStringList::const_iterator it = std::find (parts.cbegin (), parts.cend (), flag);
+        switch (it - parts.cbegin ())
         {
           case 0 :
             partCode &= static_cast<unsigned>(~CNixie::PCTable);
@@ -497,7 +497,7 @@ void CMainWindow::applyConfig ()
 
               if (dt > currentDateTime)
               {
-                CAlarm* alarm = new CAlarm;
+                auto alarm = new CAlarm;
                 alarm->setDateTime (dt);
                 alarm->setName (data[0]);
                 alarm->setDays (data[2].toUInt ());
@@ -556,7 +556,7 @@ void CMainWindow::applyConfig ()
             QStringList elems  = values.split ('|');
             if (elems.size () == 2)
             {
-              CTimer* timer = new CTimer;
+              auto timer = new CTimer;
               timer->setName (elems[0]);
               timer->setRemainingTime (elems[1].toUInt ());
               timer->setEnabled (false);
@@ -908,11 +908,14 @@ void CMainWindow::saveConfig ()
   config.setValue ("date", !ui->m_date->isHidden ());
   config.endGroup ();
 
-  config.beginGroup ("weather");
-  config.setValue ("town", m_weather->town ());
-  config.setValue ("country", m_weather->country ());
-  config.setValue ("active", !ui->m_w9->isHidden ());
-  config.endGroup ();
+  if (m_weather != nullptr)
+  {
+    config.beginGroup ("weather");
+    config.setValue ("town", m_weather->town ());
+    config.setValue ("country", m_weather->country ());
+    config.setValue ("active", !ui->m_w9->isHidden ());
+    config.endGroup ();
+  }
 
   config.beginGroup ("opengl");
   QRect            rc = normalGeometry ();

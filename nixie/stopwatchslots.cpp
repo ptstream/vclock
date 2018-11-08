@@ -39,7 +39,7 @@ static QString formatText (QVector<int> const & tours)
       text.prepend ('\n');
     }
 
-    text.prepend (QString ("#%1 %2 %3").arg (i + 1).arg (t0).arg (t1));
+    text.prepend (QString ("#%1 %2 %3").arg (i + 1).arg (t0, t1));
   }
 
   return text;
@@ -52,7 +52,7 @@ void CMainWindow::on_m_swStartPause_clicked ()
   {
     case CMode::Stopwatch :
     {
-      CStopwatch* stopwatch = static_cast<CStopwatch*>(ui->m_device->mode ());
+      auto stopwatch = static_cast<CStopwatch*>(ui->m_device->mode ());
       stopwatch->startPause ();
       updateIcons (ui, stopwatch);
       int interval = mode->interval ();
@@ -74,7 +74,7 @@ void CMainWindow::on_m_swStartPause_clicked ()
         m_ringtonePlayer->stop ();
       }
 
-      CTimer* timer = static_cast<CTimer*>(ui->m_device->mode ());
+      auto timer = static_cast<CTimer*>(ui->m_device->mode ());
       timer->swapState ();
       updateIcons (ui, timer);
       break;
@@ -92,7 +92,7 @@ void CMainWindow::on_m_swTourReset_clicked ()
   {
     case CMode::Stopwatch :
     {
-      CStopwatch* stopwatch = static_cast<CStopwatch*>(ui->m_device->mode ());
+      auto stopwatch = static_cast<CStopwatch*>(ui->m_device->mode ());
       stopwatch->tourReset ();
       updateIcons (ui, stopwatch);
       if (!stopwatch->playing ())
@@ -117,7 +117,7 @@ void CMainWindow::on_m_swTourReset_clicked ()
         m_ringtonePlayer->stop ();
       }
 
-      CTimer* timer = static_cast<CTimer*>(ui->m_device->mode ());
+      auto timer = static_cast<CTimer*>(ui->m_device->mode ());
       timer->restart ();
       break;
     }

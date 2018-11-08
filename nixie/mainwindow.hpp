@@ -313,7 +313,7 @@ private :
 
   static int sleepingInterval (QAction* action); //!< Returns the sleeping interval from an action.
   static QColor alarmIndexColor (QColor color); //!< Sets the color of the alarm index.
-  static QPixmap addIndex (QPixmap const & pxm, int index, QColor const & color, bool repeat = false); //!< Adds alarm index at the pixmap.
+  static QPixmap addIndex (QPixmap const & pxm, unsigned index, QColor const & color, bool repeat = false); //!< Adds alarm index at the pixmap.
   static QPixmap addActive (QPixmap const & pxm, QColor const & color); //!< Adds 'A' character at the pixmap.
   static void addActive (QToolButton* tb, QColor const & color); //!< Adds 'A' character at the button.
 

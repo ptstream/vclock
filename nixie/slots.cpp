@@ -90,10 +90,9 @@ void CMainWindow::clockChanged ()
 void CMainWindow::haltRPI ()
 {
   close ();
-  QProcess process;
   QStringList args;
   args << "-c" << "sudo halt";
-  process.startDetached ("/bin/sh", args);
+  QProcess::startDetached ("/bin/sh", args);
 }
 
 void CMainWindow::about ()

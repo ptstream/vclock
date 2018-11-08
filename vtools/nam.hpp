@@ -38,7 +38,7 @@ protected :
   virtual void timerEvent (QTimerEvent*);
 
 protected :
-  int m_timeout = 60000; //!< Maximum timout for the server response.
+  int m_timeout = 30000; //!< Maximum timout for the server response.
 };
 
 #endif // NAM_HPP

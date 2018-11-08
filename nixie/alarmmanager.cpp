@@ -102,7 +102,7 @@ QString CAlarmManager::daysToString (CAlarm const * alarm) const
   {
     if (alarm->isEnabledFor (iDay + 1))
     {
-      days += btns[iDay]->text ().mid (0, 2);
+      days += btns[iDay]->text ().midRef (0, 2);
     }
   }
 
@@ -147,7 +147,7 @@ void CAlarmManager::updateAlarms ()
 
       QStringList texts;
       texts << date << time << name << days;
-      QTreeWidgetItem* item = new QTreeWidgetItem (texts, index);
+      auto item = new QTreeWidgetItem (texts, index);
       ui->m_alarms->addTopLevelItem (item);
       item->setCheckState (0, m_alarms[index]->isEnabled () ? Qt::Checked : Qt::Unchecked);
     }
@@ -218,7 +218,7 @@ void CAlarmManager::updateAlarm (CAlarm* alarm)
 {
   if (!ui->m_repeat->isChecked ())
   {
-    alarm->setRepeatCount (0);
+    CAlarm::setRepeatCount (0);
   }
 
   alarm->setDateTime (m_dateTime);
@@ -236,7 +236,7 @@ void CAlarmManager::updateAlarm (CAlarm* alarm)
   alarm->setName (ui->m_name->text ());
   if (!ui->m_repeat->isChecked ())
   {
-    alarm->setRepeatCount (0);
+    CAlarm::setRepeatCount (0);
   }
 }
 
@@ -274,13 +274,13 @@ void CAlarmManager::timerEvent (QTimerEvent* event)
 
 void CAlarmManager::scrollBarValueChanged ()
 {
-  QWidget* parent = static_cast<QWidget*>(sender ()->parent ());
+  auto parent = static_cast<QWidget*>(sender ()->parent ());
   while (qobject_cast<QListWidget *>(parent) == nullptr)
   {
     parent = static_cast<QWidget*>(parent->parent ());
   }
 
-  QListWidget* listWidget = static_cast<QListWidget*>(parent);
+  auto         listWidget = static_cast<QListWidget*>(parent);
   int          hGrid      = listWidget->gridSize ().height ();
   QSize        size       = listWidget->viewport ()->size ();
   QPoint       loc (size.width () / 2, (size.height () - hGrid) / 2);
@@ -360,7 +360,7 @@ void CAlarmManager::on_m_alarms_itemSelectionChanged ()
 
 void CAlarmManager::on_m_add_clicked ()
 {
-  CAlarm* alarm = new CAlarm;
+  auto alarm = new CAlarm;
   updateAlarm (alarm);
   m_alarms.push_back (alarm);
   updateAlarms ();

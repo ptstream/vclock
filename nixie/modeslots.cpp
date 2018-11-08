@@ -13,7 +13,7 @@ void CMainWindow::thermometer ()
   }
 
   ui->m_device->setType (CMode::Thermometer, m_celcius);
-  CThermometer* mode = static_cast<CThermometer*>(ui->m_device->mode ());
+  auto mode = static_cast<CThermometer*>(ui->m_device->mode ());
   mode->setSensor (m_ambiantTemperatureSensor);
   ui->m_device->updateTubes ();
 }

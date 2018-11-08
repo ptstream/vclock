@@ -8,7 +8,7 @@ unsigned CAlarm::m_repeatInterval = 600000;
 unsigned CAlarm::m_initialRepeatCount = 3;
 int CAlarm::m_dateFormat = 0;
 
-CAlarm::CAlarm () : QTimer (), m_repeatCount (m_initialRepeatCount)
+CAlarm::CAlarm () : m_repeatCount (m_initialRepeatCount)
 {
   setSingleShot (true);
   m_repeatTimer.setInterval (m_repeatInterval);
@@ -101,7 +101,7 @@ bool CAlarm::operator != (CAlarm const & other) const
 
 CAlarm* CAlarm::clone () const
 {
-  CAlarm* alarm        = new CAlarm;
+  auto   alarm         = new CAlarm;
   alarm->m_dateTime    = m_dateTime;
   alarm->m_name        = m_name;
   alarm->m_days        = m_days;

@@ -44,16 +44,23 @@ void CMainWindow::on_m_weatherLogo_clicked ()
 
 void CMainWindow::updateWeather ()
 {
+  int const maxRetries = 4;
   if (m_weather != nullptr)
   {
     QApplication::setOverrideCursor (Qt::WaitCursor);
     if (!m_weather->hasValidLocation ())
     {
+      QString w8 = tr ("Searching for location");
+      ui->m_w8->setText (w8);
       initLocation ();
+      ui->m_w8->clear ();
     }
 
     if (!m_weather->town ().isEmpty () && !m_weather->country ().isEmpty ())
     {
+      QString w8 = tr ("Searching for ") + m_weather->town () + " ("  + m_weather->country () + ") -> " +
+                   QString::number (m_weatherRetry + 1);
+      ui->m_w8->setText (w8);
       QVector<CForecast> forecasts = m_weather->data (m_nam);
       if (!forecasts.isEmpty ())
       {
@@ -103,8 +110,7 @@ void CMainWindow::updateWeather ()
           date        = date.addDays (1);
           QString day = date.toString("dddd");
           line        = QString ("<tr><th>%1</th><th>%2</th><th><img src=\":/yahooicons/%3.png\"></th><th>%4</th><th>%5</th></tr>").
-                        arg (day).arg (trText).arg (forecast.code ()).arg (degree (forecast.tempMin ())).
-                        arg (degree (forecast.tempMax ()));
+                        arg (day, trText).arg (forecast.code ()).arg (degree (forecast.tempMin ()), degree (forecast.tempMax ()));
           texts += line;
         }
 
@@ -115,7 +121,7 @@ void CMainWindow::updateWeather ()
       else
       {
         ++m_weatherRetry;
-        if (m_weatherRetry == 2)
+        if (m_weatherRetry == maxRetries)
         {
           m_weatherTimer.stop ();
           delete m_weather;
@@ -126,7 +132,16 @@ void CMainWindow::updateWeather ()
     else
     {
       m_weatherTimer.stop ();
+      ui->m_w8->clear ();
     }
+
+    if (m_weatherRetry == maxRetries || m_weather->town ().isEmpty ())
+    {
+      ui->m_w8->clear ();
+      ui->m_w4->setHidden (true);
+      ui->m_w6->setHidden (true);
+    }
+
 
     QApplication::restoreOverrideCursor ();
   }

@@ -40,7 +40,7 @@ int CTimer::digits () const
 
 CTimer* CTimer::clone () const
 {
-  CTimer* timer          = new CTimer;
+  auto timer             = new CTimer;
   timer->m_remainingTime = m_remainingTime;
   timer->m_initialTime   = m_initialTime;
   timer->m_name          = m_name;

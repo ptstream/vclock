@@ -35,5 +35,5 @@ int main (int argc, char *argv[])
   QIcon icon (":/icons/nixie.ico");
   w.setWindowIcon (icon);
   w.show ();
-  return a.exec ();
+  return QApplication::exec ();
 }

@@ -24,7 +24,7 @@ QByteArray CNam::callData (QUrl const & url, QNetworkAccessManager* nam)
     connect (reply, SIGNAL (error (QNetworkReply::NetworkError)), this, SLOT (error (QNetworkReply::NetworkError)));
     connect (reply, SIGNAL (finished ()), this, SLOT (finished ()));
     int idTimer = startTimer (m_timeout);
-    exec (QEventLoop::ExcludeUserInputEvents);
+    exec (/*QEventLoop::ExcludeUserInputEvents*/);
     killTimer (idTimer);
     data = reply->readAll ();
     reply->deleteLater ();
@@ -35,8 +35,8 @@ QByteArray CNam::callData (QUrl const & url, QNetworkAccessManager* nam)
 
 void CNam::error (QNetworkReply::NetworkError err)
 {
-  QNetworkReply* replySender = static_cast<QNetworkReply*>(sender ());
-  QString        errorString = replySender->errorString ();
+  auto    replySender = static_cast<QNetworkReply*>(sender ());
+  QString errorString = replySender->errorString ();
   qDebug () << "CNam::error: " << err << " (" << errorString << ")";
   quit ();
 }

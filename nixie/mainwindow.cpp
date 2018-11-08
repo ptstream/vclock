@@ -377,7 +377,7 @@ void CMainWindow::createRingtonePlayer ()
 
 void CMainWindow::alarmClicked (QObject* o)
 {
-  QToolButton* tb = static_cast<QToolButton*>(o);
+  auto tb = static_cast<QToolButton*>(o);
   for (CAlarm* alarm : m_alarms)
   {
     if (alarm->widget () == tb)
@@ -462,8 +462,8 @@ void CMainWindow::updateTimerButtons ()
   ui->m_swStartPause->setIcon (QIcon (":/icons/pause.png"));
   if (hide)
   {
-    CMode::EType type = static_cast<CMode::EType>(m_prevType & 0xff);
-    bool         data = type == CMode::Clock ? m_h24 : m_celcius;
+    auto type = static_cast<CMode::EType>(m_prevType & 0xff);
+    bool data = type == CMode::Clock ? m_h24 : m_celcius;
     ui->m_device->setType (type, data);
     ui->m_device->setNixieTubeNumber ((m_prevType >> 8) & 0xff);
   }
@@ -493,7 +493,7 @@ void CMainWindow::timerClicked (QObject* sender)
   {
     if (timer->isActive () && timer->isEnabled ())
     {
-      QToolButton* tb = static_cast<QToolButton*>(timer->widget ());
+      auto tb = static_cast<QToolButton*>(timer->widget ());
       if (sender == tb)
       {
         if (ui->m_device->mode () == timer)
@@ -558,7 +558,7 @@ int CMainWindow::sleepingInterval (QAction* action)
   return interval;
 }
 
-QPixmap CMainWindow::addIndex (QPixmap const & pxm, int index, QColor const & color, bool repeat)
+QPixmap CMainWindow::addIndex (QPixmap const & pxm, unsigned index, QColor const & color, bool repeat)
 {
   QString  text = index < 32 ? QString::number (index) : QString (QChar (index));
   int      hPxm = pxm.height ();

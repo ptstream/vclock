@@ -36,7 +36,7 @@ void CMainWindow::on_m_mute_clicked ()
 
 void CMainWindow::sleeping ()
 {
-  QAction* action    = static_cast<QAction*>(sender ());
+  auto action        = static_cast<QAction*>(sender ());
   m_sleepingInterval = sleepingInterval (action); // Minutes
   if (m_sleepingInterval == 0)
   {

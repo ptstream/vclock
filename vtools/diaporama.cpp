@@ -34,8 +34,8 @@ void CDiaporama::run ()
     }
     else
     { // CropImage
-      int dx = static_cast<int>(iw * (1.0f - ih / wh));
-      rc     = QRect (dx / 2, 0, static_cast<int>(iw - dx), static_cast<int>(ih));
+      auto dx = static_cast<int>(iw * (1.0f - ih / wh));
+      rc      = QRect (dx / 2, 0, static_cast<int>(iw - dx), static_cast<int>(ih));
     }
   }
   else
@@ -49,8 +49,8 @@ void CDiaporama::run ()
       }
       else
       { // CropImage
-        int dy = static_cast<int>(ih * (1.0f - iw / ww));
-        rc     = QRect (0, dy / 2, static_cast<int>(iw), static_cast<int>(ih - dy));
+        auto dy = static_cast<int>(ih * (1.0f - iw / ww));
+        rc      = QRect (0, dy / 2, static_cast<int>(iw), static_cast<int>(ih - dy));
       }
     }
   }

@@ -27,7 +27,7 @@ static QMenu* addMenu (QMenu* parent, QString const & title, float coef)
 
 void CMainWindow::setMainMenu ()
 {
-  QMenu* menu = new QMenu (ui->m_mainMenu);
+  auto menu = new QMenu (ui->m_mainMenu);
   changeFontSize (menu, m_menuFontCoef);
   ui->m_mainMenu->setMenu (menu);
 
@@ -155,7 +155,7 @@ void CMainWindow::aboutToShowMainMemu ()
 
 void CMainWindow::setSleepingMenu ()
 {
-  QMenu* menu = new QMenu (ui->m_sleeping);
+  auto menu = new QMenu (ui->m_sleeping);
   changeFontSize (menu, m_menuFontCoef);
   ui->m_sleeping->setMenu (menu);
   QString texts[] = { tr ("Disable"),
@@ -169,7 +169,7 @@ void CMainWindow::setSleepingMenu ()
                     };
 
   bool first = true;
-  for (QString const text : texts)
+  for (QString const & text : texts)
   {
     QAction* action = menu->addAction (text, this, &CMainWindow::sleeping);
     action->setCheckable (true);

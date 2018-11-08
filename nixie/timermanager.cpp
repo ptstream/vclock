@@ -23,9 +23,9 @@ CTimerManager::CTimerManager (QList<CTimer*>& timers, QWidget* parent) :
   QListWidget*                lws[]       = { ui->m_s, ui->m_m };
   int                         mod[]       = { 60, 100 };
   bool                        touchScreen = touchScreenActivated ();
-  for (unsigned i = 0, count = sizeof (mod) / sizeof (int); i < count; ++i)
+  for (int i = 0, count = sizeof (mod) / sizeof (int); i < count; ++i)
   {
-    for (unsigned iItem = 0, cItems = mod[i] * maxRepeats; iItem < cItems; ++iItem)
+    for (int iItem = 0, cItems = mod[i] * maxRepeats; iItem < cItems; ++iItem)
     {
       QListWidgetItem* item = new QListWidgetItem (formatItem (iItem % mod[i]), lws[i]);
       item->setTextAlignment (Qt::AlignHCenter);
@@ -67,20 +67,20 @@ CTimerManager::CTimerManager (QList<CTimer*>& timers, QWidget* parent) :
 
 void CTimerManager::updatedDelay ()
 {
-  m_minutes = ui->m_m->currentItem ()->text ().toInt ();
-  m_seconds = ui->m_s->currentItem ()->text ().toInt ();
+  m_minutes = ui->m_m->currentItem ()->text ().toUInt ();
+  m_seconds = ui->m_s->currentItem ()->text ().toUInt ();
   updateAddRep ();
 }
 
 void CTimerManager::scrollBarValueChanged ()
 {
-  QWidget* parent = static_cast<QWidget*>(sender ()->parent ());
+  auto parent = static_cast<QWidget*>(sender ()->parent ());
   while (qobject_cast<QListWidget *>(parent) == nullptr)
   {
     parent = static_cast<QWidget*>(parent->parent ());
   }
 
-  QListWidget*     listWidget = static_cast<QListWidget*>(parent);
+  auto             listWidget = static_cast<QListWidget*>(parent);
   int              hGrid      = listWidget->gridSize ().height ();
   QSize            size       = listWidget->viewport ()->size ();
   QPoint           loc (size.width () / 2, (size.height () - hGrid) / 2);
@@ -102,7 +102,7 @@ void CTimerManager::scrollBarValueChanged ()
       modValue = 60;
     }
 
-    *row = listWidget->row (item) % modValue;
+    *row = static_cast<unsigned>(listWidget->row (item) % modValue);
   }
 
   updateAddRep ();
@@ -202,11 +202,11 @@ void CTimerManager::updateTimers ()
 
   ui->m_timers->clear ();
   std::sort (m_timers.begin (), m_timers.end (), compare);
-  for (int iTimer = 0, cTimers = m_timers.size (); iTimer < cTimers; ++iTimer)
+  for (CTimer* timer : m_timers)
   {
-    QTreeWidgetItem* item = new QTreeWidgetItem (ui->m_timers, formatItem (m_timers[iTimer]));
-    item->setCheckState (0, m_timers[iTimer]->isEnabled () ? Qt::Checked : Qt::Unchecked);
-    if (m_timers[iTimer]->isActive ())
+    QTreeWidgetItem* item = new QTreeWidgetItem (ui->m_timers, formatItem (timer));
+    item->setCheckState (0, timer->isEnabled () ? Qt::Checked : Qt::Unchecked);
+    if (timer->isActive ())
     {
       item->setIcon (0, QIcon (":/icons/sandglass.png"));
       item->setFlags (item->flags () & ~(Qt::ItemIsSelectable/* | Qt::ItemIsUserCheckable*/ | Qt::ItemIsEnabled));
@@ -341,7 +341,7 @@ void CTimerManager::cancel ()
 
 void CTimerManager::addClicked ()
 {
-  CTimer* timer = new CTimer;
+  auto timer = new CTimer;
   timer->setRemainingTime (delay ());
   timer->setName (ui->m_name->text ());
   m_timers.push_back (timer);

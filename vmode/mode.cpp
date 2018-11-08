@@ -5,15 +5,15 @@ int CMode::digits (QTime const & time, bool h24)
 {
   int   value       = 0;
   int   coef        = 10000;
-  int   hms[]       = { time.second (), time.minute (), time.hour () };
-  if (!h24 && hms[2] > 12)
+  int   hmss[]      = { time.second (), time.minute (), time.hour () };
+  if (!h24 && hmss[2] > 12)
   {
-    hms[2] -= 12;
+    hmss[2] -= 12;
   }
 
-  for (unsigned i = 0; i < sizeof (hms) / sizeof (int); ++i)
+  for (int hms : hmss)
   {
-    value += (hms[i] / 10 + (hms[i] % 10) * 10) * coef;
+    value += (hms / 10 + (hms % 10) * 10) * coef;
     coef  /= 100;
   }
 
@@ -24,10 +24,10 @@ int CMode::digits (int ms)
 {
   int   value       = 0;
   int   coef        = 10000;
-  int   hms[]       = { (ms % 1000) / 10, (ms / 1000) % 60, ms / 60000 };
-  for (unsigned i = 0; i < sizeof (hms) / sizeof (int); ++i)
+  int   hmss[]      = { (ms % 1000) / 10, (ms / 1000) % 60, ms / 60000 };
+  for (int hms : hmss)
   {
-    value += (hms[i] / 10 + (hms[i] % 10) * 10) * coef;
+    value += (hms / 10 + (hms % 10) * 10) * coef;
     coef  /= 100;
   }
 

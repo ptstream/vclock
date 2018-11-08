@@ -16,7 +16,7 @@ void CMainWindow::alarms ()
 void CMainWindow::alarmStopped ()
 {
   ring ();
-  CAlarm* alarm = static_cast<CAlarm*>(sender ());
+  auto alarm = static_cast<CAlarm*>(sender ());
   updateAlarmButtons ();
   m_alarms.removeOne (alarm);
   delete alarm;
@@ -30,8 +30,8 @@ void CMainWindow::alarmRestarted ()
 void CMainWindow::alarmRepeatStarted (unsigned index)
 {
   ring ();
-  CAlarm*      alarm = static_cast<CAlarm*>(sender ());
-  QToolButton* btn   = static_cast<QToolButton*>(alarm->widget ());
+  auto alarm = static_cast<CAlarm*>(sender ());
+  auto btn   = static_cast<QToolButton*>(alarm->widget ());
   if (btn != nullptr)
   {
     QPixmap pxm (":/icons/alarm.png");

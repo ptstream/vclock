@@ -257,7 +257,7 @@ void CNixie::cleanup ()
 
 void CNixie::updateTubes ()
 {
-  if (m_defaultLightings.size () == 0)
+  if (m_defaultLightings.isEmpty ())
   {
     initializeDefaultLightings ();
   }
@@ -293,8 +293,8 @@ void CNixie::updateBackground ()
 {
   if (m_diaporamaTexture == nullptr && m_diaporamaMutex.tryLock ())
   {
-    m_diaporamaTexture    = new QImage;
-    CDiaporama* diaporama = new CDiaporama (m_diaporamaIndex, m_diaporamaMutex,
+    m_diaporamaTexture = new QImage;
+    auto diaporama     = new CDiaporama (m_diaporamaIndex, m_diaporamaMutex,
                                             *m_diaporamaTexture, m_diaporamaImages, this,
                                              m_diaporamaMode, m_lightAttenuation);
     m_diaporamaMutex.unlock ();
@@ -393,7 +393,7 @@ void CNixie::allocateVbo ()
   if (!mesh.isEmpty ())
   {
     m_cVertices[i] = mesh.size () / 6;
-    int size       = static_cast<int>(byteSize (m_cVertices[i]));
+    auto size      = static_cast<int>(byteSize (m_cVertices[i]));
     m_vbos[i].bind ();
     m_vbos[i].allocate (size);
     m_vbos[i].write (0, mesh.constData (), size);
@@ -431,7 +431,7 @@ void CNixie::allocateVbo ()
       if (!mesh.isEmpty ())
       {
         m_cVertices[i] = mesh.size () / 6;
-        int size       = static_cast<int>(byteSize (m_cVertices[i]));
+        auto size      = static_cast<int>(byteSize (m_cVertices[i]));
         m_vbos[i].bind ();
         m_vbos[i].allocate (size);
         m_vbos[i].write (0, mesh.constData (), size);
@@ -809,7 +809,7 @@ void CNixie::setDiaporamaInterval (int interval)
   m_diaporamaTimer.setInterval (m_diaporamaInterval);
 }
 
-void CNixie::setTexture (ETexture index, QString name)
+void CNixie::setTexture (ETexture index, QString const & name)
 {
   if (!name.isEmpty ())
   {

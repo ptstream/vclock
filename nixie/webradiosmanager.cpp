@@ -86,7 +86,7 @@ void CWebRadiosManager::providerContentItemClicked (QListWidgetItem* item)
     m_blockUpdateLogo = true;
     for (CStation const & station : stations)
     {
-      QListWidgetItem* stationItem = new QListWidgetItem (station.name (), ui->m_providerContent, TStation);
+      auto stationItem = new QListWidgetItem (station.name (), ui->m_providerContent, TStation);
       stationItem->setIcon (icon);
     }
 
@@ -171,7 +171,7 @@ void CWebRadiosManager::loadFavorites (QUrl const & url)
   QIcon                     defIcon (":/icons/radio.png");
   for (CStation const & station : stations)
   {
-    QListWidgetItem* item    = new QListWidgetItem (station.name (), ui->m_favorites);
+    auto            item    = new QListWidgetItem (station.name (), ui->m_favorites);
     QUrl const &     iconUrl = station.logo ();
     QIcon            icon    = !iconUrl.isValid () ? ::logo (iconUrl, m_nam) : defIcon;
     item->setIcon (icon);
@@ -292,8 +292,8 @@ void CWebRadiosManager::search ()
       {
         ls1 = s1.name ().toLower ();
         ls2 = s2.name ().toLower ();
-        unsigned i1 = static_cast<unsigned>(ls1.indexOf (ltext));
-        unsigned i2 = static_cast<unsigned>(ls2.indexOf (ltext));
+        auto i1 = static_cast<unsigned>(ls1.indexOf (ltext));
+        auto i2 = static_cast<unsigned>(ls2.indexOf (ltext));
         if (i1 == i2)
         {
           return ls1 < ls2;
@@ -309,7 +309,7 @@ void CWebRadiosManager::search ()
     m_blockUpdateLogo = true;
     for (CStation const & station : stations)
     {
-      QListWidgetItem* item = new QListWidgetItem (station.name (), ui->m_providerContent, TStation);
+      auto item = new QListWidgetItem (station.name (), ui->m_providerContent, TStation);
       item->setIcon (icon);
     }
 

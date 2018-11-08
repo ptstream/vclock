@@ -187,10 +187,10 @@ static void drawLedSegment (QPainter &painter, QPoint const & pos, int segmentNo
   {
     int             width = segLen / 5;
     QPoint          dp (width / 2, width / 2);
-    QRadialGradient radialGrad (center, width / 2);
-    radialGrad.setColorAt (1.0f, brushParams.m_colorLow);
-    radialGrad.setColorAt (0.5f, brushParams.m_colorHigh);
-    radialGrad.setColorAt (0.0f, brushParams.m_white);
+    QRadialGradient radialGrad (center, dp.rx ());
+    radialGrad.setColorAt (1.0, brushParams.m_colorLow);
+    radialGrad.setColorAt (0.5, brushParams.m_colorHigh);
+    radialGrad.setColorAt (0.0, brushParams.m_white);
     painter.setBrush (QBrush (radialGrad));
     QRectF rc (center - dp, center + dp);
     painter.drawPie (rc, 0, 5760);

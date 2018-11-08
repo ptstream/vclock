@@ -33,7 +33,7 @@ float CXrandrBrightness::value () const
   process.waitForFinished ();
   QByteArray        ret   = process.readAll ();
   QList<QByteArray> lines = ret.split ('\n');
-  for (QByteArray line : lines)
+  for (QByteArray const & line : lines)
   {
     if (line.contains ("Brightness"))
     {

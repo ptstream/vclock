@@ -75,7 +75,7 @@ int CWebRadio::index (QUrl const & url)
   QVector<CStation>::const_iterator it      = std::find (itBegin, itEnd, station);
   if (it != itEnd)
   {
-    index = it - itBegin;
+    index = static_cast<int>(it - itBegin);
   }
 
   return index;

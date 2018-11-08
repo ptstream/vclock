@@ -63,8 +63,8 @@ public:
   void restart ();
 
 private :
-  unsigned m_remainingTime = 0; //!< The remaining time.
-  unsigned m_initialTime = 0; //!< The initial time.
+  int m_remainingTime = 0; //!< The remaining time.
+  int m_initialTime = 0; //!< The initial time.
   QString m_name; //!< The name.
   QWidget* m_widget = nullptr; //!< The attached widget.
   mutable int m_digits = 0; //!* The current value.
