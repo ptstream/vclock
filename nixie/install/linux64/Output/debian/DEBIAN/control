@@ -1,6 +1,6 @@
 Source: Nixie
 Package: Nixie
-Version: 0.0.1
+Version: 0.0.2
 Section: base
 Priority: optional
 Architecture: all

@@ -13,7 +13,7 @@ DEVEL=/home/pi/Devel
 OUTPUT=$DEVEL/$FOLDER/$PRODUCT/install/pi32/Output
 TARGET=$OUTPUT/debian/usr/bin/$PRODUCT
 BINARIES=/home/pi/Devel/build-$FOLDER-Desktop-Release
-VERSION=0.0.1
+VERSION=0.0.2
 
 if [ -d $TARGET ]
 then
@@ -88,38 +88,12 @@ echo "Copy Qt platforms"
 mkdir $TARGET/platforms
 cp $QTDIR/plugins/platforms/*.* $TARGET/platforms
 
-echo Change .ini file entries to build desktop package
-cd $TARGET
-sed -e 's/size=max/# size=default/g' < $PRODUCT.ini > $PRODUCT.tmp
-rm $PRODUCT.ini
-mv $PRODUCT.tmp $PRODUCT.ini
-
-sed -e 's/# size/=defaultsize=max/g' < $PRODUCT.ini > $PRODUCT.tmp
-rm $PRODUCT.ini
-mv $PRODUCT.tmp $PRODUCT.ini
-
-echo "Build debian desktop package"
+echo "Build rapbian package"
 cd $CWD
 cd Output
 chmod 755 debian/DEBIAN/post*
 chmod 755 debian/DEBIAN/pre*
-dpkg-deb --build debian $PRODUCT-rpi3-desktop-$VERSION.deb
-cd ..
-
-echo Change .ini file entries to build touch screen package
-cd $TARGET
-sed -e 's/# title=true/title=false/g' < $PRODUCT.ini > $PRODUCT.tmp
-rm $PRODUCT.ini
-mv $PRODUCT.tmp $PRODUCT.ini
-
-sed -e 's/# size=default/size=max/g' < $PRODUCT.ini > $PRODUCT.tmp
-rm $PRODUCT.ini
-mv $PRODUCT.tmp $PRODUCT.ini
-
-cd $CWD
-echo "Build touch screen package"
-cd Output
-dpkg-deb --build debian $PRODUCT-rpi3-ts-$VERSION.deb
+dpkg-deb --build debian $PRODUCT-rpi3-$VERSION.deb
 cd ..
 echo "********************** End build *************************"
 

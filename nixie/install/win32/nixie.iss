@@ -5,7 +5,7 @@
 #define MyDevelDir "C:\Users\patrice\Documents\Development\"
 
 #define MyAppName "nixie"
-#define MyAppVersion "0.0.1"
+#define MyAppVersion "0.0.2"
 #define MyAppPublisher "Nixie a vintage virtual Nixie clock"
 #define MyAppExeName "nixie.exe"
 
@@ -20,7 +20,7 @@ AppVersion={#MyAppVersion}
 AppPublisher={#MyAppPublisher}
 DefaultDirName={pf}\{#MyAppName}
 DisableProgramGroupPage=yes
-OutputBaseFilename={#MyAppName}-win32-0.0.1
+OutputBaseFilename={#MyAppName}-win32-0.0.2
 Compression=lzma
 SolidCompression=yes
 UninstallDisplayIcon={app}\{#MyAppName}.exe
