@@ -1,6 +1,7 @@
 #include "mainwindow.hpp"
 #include "ui_mainwindow.h"
 #include "../vmode/timer.hpp"
+#include "../vmode/digittest.hpp"
 #include "../vtools/webradio.hpp"
 #include "../vtools/alarm.hpp"
 #include "../vtools/brightness.hpp"
@@ -85,7 +86,8 @@ struct SConfigWebradios
   int               m_volume   = 20;
   bool              m_mp3      = true;
   int               m_index    = -1;
-  QString           m_player   = "cvlc --quiet --extraintf=rc --repeat|add |quit|"; // Raspberry only
+  int               m_simpleUserEuid = 1000;
+  QString           m_player   = "cvlc --quiet --extraintf=rc --repeat|add |quit|||1000"; // Raspberry only
   QString           m_mixer    = "amixer"; // Raspberry only
   QVector<CStation> m_stations;
 };
@@ -194,7 +196,7 @@ static QUrl ringtoneUrl (QString fileName)
 }
 
 template<typename T>
-static bool keyValue (QSettings& config, T& v, char const * key)
+static bool keyValue (QSettings& config, T& v, QString const & key)
 {
   bool exists = config.contains (key);
   if (exists)
@@ -205,7 +207,7 @@ static bool keyValue (QSettings& config, T& v, char const * key)
   return exists;
 }
 
-static bool keyValue (QSettings& config, float& v, char const * key)
+static bool keyValue (QSettings& config, float& v, QString const & key)
 {
   bool exists = config.contains (key);
   if (exists)
@@ -216,7 +218,7 @@ static bool keyValue (QSettings& config, float& v, char const * key)
   return exists;
 }
 
-static bool keyValue (QSettings& config, QString& v, char const * key)
+static bool keyValue (QSettings& config, QString& v, QString const & key)
 {
   bool exists = config.contains (key);
   if (exists)
@@ -227,7 +229,7 @@ static bool keyValue (QSettings& config, QString& v, char const * key)
   return exists;
 }
 
-static bool keyValue (QSettings& config, bool& v, char const * key)
+static bool keyValue (QSettings& config, bool& v, QString const & key)
 {
   bool exists = config.contains (key);
   if (exists)
@@ -370,11 +372,11 @@ void CMainWindow::applyConfig ()
         {
           if (key == "motion")
           {
-            keyValue (config, positions.m_motion, "motion");
+            keyValue (config, positions.m_motion, key);
           }
           else if (key == "motionInterval")
           {
-            keyValue (config, positions.m_motionInterval, "motionInterval");
+            keyValue (config, positions.m_motionInterval, key);
           }
           else if (!key.startsWith ('#'))
           {
@@ -432,31 +434,37 @@ void CMainWindow::applyConfig ()
       {
         if (key == "index")
         {
-          keyValue (config, webRadios.m_index, "index");
+          keyValue (config, webRadios.m_index, key);
         }
         else if (key == "volume")
         {
-          keyValue (config, webRadios.m_volume, "volume");
+          keyValue (config, webRadios.m_volume, key);
         }
         else if (key == "mixer")
         {
 #ifndef QTMULTIMEDIA_DEFINED
-          keyValue (config, webRadios.m_mixer, "mixer");
+          keyValue (config, webRadios.m_mixer, key);
 #endif
         }
         else if (key == "player")
         {
 #ifndef QTMULTIMEDIA_DEFINED
-          keyValue (config, webRadios.m_player, "player");
+          keyValue (config, webRadios.m_player, key);
+#endif
+        }
+        else if (key == "simpleUserEuid")
+        {
+#ifndef QTMULTIMEDIA_DEFINED
+          keyValue (config, webRadios.m_simpleUserEuid, key);
 #endif
         }
         else if (key == "mp3Only")
         {
-          keyValue (config, webRadios.m_mp3, "mp3Only");
+          keyValue (config, webRadios.m_mp3, key);
         }
         else if (key == "provider")
         {
-          keyValue (config, webRadios.m_player, "provider");
+          keyValue (config, webRadios.m_player, key);
         }
         else if (!key.startsWith ('#'))
         {
@@ -507,27 +515,27 @@ void CMainWindow::applyConfig ()
           }
           else if (key == "repeat")
           {
-            keyValue (config, alarms.m_repeat, "repeat");
+            keyValue (config, alarms.m_repeat, key);
           }
           else if (key == "interval")
           {
-            keyValue (config, alarms.m_interval, "interval");
+            keyValue (config, alarms.m_interval, key);
           }
           else if (key == "volumeMax")
           {
-            keyValue (config, alarms.m_volumeMax, "volumeMax");
+            keyValue (config, alarms.m_volumeMax, key);
           }
           else if (key == "volumeMin")
           {
-            keyValue (config, alarms.m_volumeMin, "volumeMin");
+            keyValue (config, alarms.m_volumeMin, key);
           }
           else if (key == "volumeStep")
           {
-            keyValue (config, alarms.m_volumeStep, "volumeStep");
+            keyValue (config, alarms.m_volumeStep, key);
           }
           else if (key == "ringtone")
           {
-            if (keyValue (config, value, "ringtone"))
+            if (keyValue (config, value, key))
             {
               alarms.m_ringtone = value;
             }
@@ -544,7 +552,7 @@ void CMainWindow::applyConfig ()
         {
           if (key == "ringtone")
           {
-            keyValue (config, value, "ringtone");
+            keyValue (config, value, key);
             if (!value.isEmpty ())
             {
               timers.m_ringtone = value;
@@ -690,6 +698,7 @@ void CMainWindow::applyConfig ()
 #ifndef QTMULTIMEDIA_DEFINED
   m_webRadios.setMixerProgram (webRadios.m_mixer);
   m_webRadios.setPlayerProgram (webRadios.m_player);
+  m_webRadios.setSimpleUserEuid (webRadios.m_simpleUserEuid);
 #endif
   if (!webRadios.m_provider.isEmpty ())
   {
@@ -797,17 +806,7 @@ void CMainWindow::applyConfig ()
     }
   }
 
-  if (tubes.m_modeType == CMode::Thermometer)
-  { // The last mode was thermometer
-    ui->m_device->setNixieTubeNumber (3);
-    this->thermometer ();
-  }
-  else
-  { // The last mode was other modes, force clock mode.
-    ui->m_device->setNixieTubeNumber (m_cClockTubes);
-    this->clock ();
-  }
-
+  m_configType = tubes.m_modeType;
   if (!m_alarms.isEmpty ())
   {
     launchAlarms ();

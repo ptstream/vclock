@@ -32,6 +32,8 @@ public :
   void setPlayerProgram (QString const & player);
   void setMixerProgram (QString const & mixer) { m_mixerProgram = mixer; }
   void setPlayerComs (QList<QByteArray> const & coms) { m_playerComs = coms; }
+  void setSimpleUserEuid (__uid_t id) { m_simpleUserEuid = id; }
+  __uid_t simpleUserEuid () const { return m_simpleUserEuid; }
   QList<QByteArray> const & playerComs () { return m_playerComs; }
   void playTrack ();
 
@@ -42,6 +44,10 @@ protected slots :
 signals :
   void trackEnded ();
 
+private :
+  void dropPrivileges (); // Remove root privileges e.g. vlc don't start for root user.
+  void restorePrivileges (); // restore root privileges e.g. vlc don't start for root user.
+
 protected :
   State m_state = StoppedState;
   QUrl m_url;
@@ -50,6 +56,7 @@ protected :
   QList<QByteArray> m_playerComs;
   QString m_mixerProgram;
   int m_timeout = 5000;
+  __uid_t m_simpleUserEuid = 1000;
 };
 
 #endif //QTMULTIMEDIA_DEFINED

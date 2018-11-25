@@ -3,6 +3,24 @@
 #ifndef QTMULTIMEDIA_DEFINED
 #include <QDebug>
 #include <QProcess>
+#include <sys/types.h>
+#include <unistd.h>
+
+void QMediaPlayer::dropPrivileges ()
+{
+  if (::getuid () == 0 && ::seteuid (m_simpleUserEuid) != 0)
+  {
+    qDebug () << "Error drop privileges";
+  }
+}
+
+void QMediaPlayer::restorePrivileges ()
+{
+  if (::getuid () == 0 && ::seteuid (0) != 0)
+  {
+    qDebug () << "Error restore privileges";
+  }
+}
 
 static bool decodeMute (QString const & program, QByteArray const & read)
 {
@@ -88,8 +106,10 @@ void QMediaPlayer::play ()
 {
   if (!m_playerComs.isEmpty () && m_state == StoppedState)
   {
+    dropPrivileges ();
     m_player->start (m_playerComs[PlayerName]);
     m_player->waitForStarted (m_timeout);
+    restorePrivileges ();
     for (int i = PLayerInit, count = m_playerComs.size (); i < count; ++i)
     {
       m_player->write (m_playerComs[i]);
