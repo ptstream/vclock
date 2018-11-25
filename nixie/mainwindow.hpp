@@ -140,6 +140,9 @@ private slots :
   /*! Activates the fastcounter mode. */
   void fastCounter ();
 
+  /*! Activates the test digits mode. */
+  void digitTest ();
+
   /*! Activates the stopwatch mode. */
   void stopwatch ();
 
@@ -310,6 +313,8 @@ private :
   void updateStopwatchButons (); //!< Update stopwatch buttons.
   void setFontFamily (QString const & family); //!< Sets font family.
   float brightness () const; //!< Return the hardware or software brightness.
+  void setSimpleMode (CMode::EType type); //!< Set fast counter or digit test mode.
+  void stopStartupDigitsTest (); //!< Test digits end of cycle.
 
   static int sleepingInterval (QAction* action); //!< Returns the sleeping interval from an action.
   static QColor alarmIndexColor (QColor color); //!< Sets the color of the alarm index.
@@ -328,6 +333,7 @@ private:
   bool m_h24 = true; //!< 24 or 12 hours clock.
   bool m_celcius = true; //!< Temperature units.
   float m_menuFontCoef = 0.0f;
+  CMode::EType m_configType = CMode::Clock;
 
   // Web radios
   int m_stationNameLength = 60; //!< Maximum station name length.

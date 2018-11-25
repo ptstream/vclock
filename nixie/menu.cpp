@@ -44,6 +44,7 @@ void CMainWindow::setMainMenu ()
   modeMenu->addAction (tr ("Timer"), this, &CMainWindow::timer);
   modeMenu->addAction (tr ("Thermometer"), this, &CMainWindow::thermometer);
   modeMenu->addAction (tr ("Fast counter"), this, &CMainWindow::fastCounter);
+  modeMenu->addAction (tr ("Digit test"), this, &CMainWindow::digitTest);
 
   menu->addSeparator ();
   QMenu* optionsMenu = addMenu (menu, tr ("Options"), m_menuFontCoef);

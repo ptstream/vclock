@@ -13,11 +13,12 @@ public:
                Stopwatch, //!< Stopwatch with laps times.
                Thermometer, //!< Thermometer degree Celcius or Fahrenheit (3 digits).
                Timer, //!< Timer.
+               DigitTest, //!< Digit test (just for fun).
                LastType //!< Internal use.
              };
 
   /*! Constructor. */
-  CMode (EType type) : m_type (type) { updateInterval (); }
+  CMode (EType type);
 
   /*! Destructor. */
   virtual ~CMode () {}

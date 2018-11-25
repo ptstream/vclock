@@ -4,6 +4,7 @@
 #include "webradiosmanager.hpp"
 #include "../vtools/webradio.hpp"
 #include "../vmode/thermometer.hpp"
+#include "../vmode/digittest.hpp"
 #include "../vtools/tempsensorinterface.hpp"
 #include "../vtools/weatherinterface.hpp"
 #include "../vtools/webradiosinterface.hpp"
@@ -23,7 +24,8 @@ void CMainWindow::clockChanged ()
   CAlarm::setDateFormat (m_dateFormat);
   QDate date = QDate::currentDate ();
   ui->m_date->setText (QLocale::system ().toString (date, static_cast<QLocale::FormatType>(m_dateFormat)));
-  CMode::EType type = ui->m_device->mode ()->type ();
+  CMode*       mode = ui->m_device->mode ();
+  CMode::EType type = mode->type ();
   switch (type)
   {
     case CMode::Clock :
@@ -79,6 +81,16 @@ void CMainWindow::clockChanged ()
       QTime time = QTime::currentTime ();
       ui->m_w1->setText (QLocale::system ().toString (time, "hh:mm") + ' ');
       ui->m_w1->setHidden (false); // Show temperature value
+      break;
+    }
+
+    case CMode::DigitTest :
+    {
+      CDigitTest* digitTest = static_cast<CDigitTest*>(mode);
+      if (digitTest->isCycleFinished ())
+      {
+        stopStartupDigitsTest ();
+      }
       break;
     }
 
@@ -204,3 +216,27 @@ void CMainWindow::on_m_webRadiosLogo_clicked ()
     QDesktopServices::openUrl (url);
   }
 }
+
+void CMainWindow::stopStartupDigitsTest ()
+{
+  if (m_configType != CMode::LastType)
+  {
+    auto digitTest = dynamic_cast<CDigitTest*>(ui->m_device->mode ());
+    if (digitTest != nullptr)
+    {
+      if (m_configType == CMode::Thermometer)
+      { // The last mode was thermometer
+        ui->m_device->setNixieTubeNumber (3);
+        this->thermometer ();
+      }
+      else
+      { // The last mode was other modes, force clock mode.
+        ui->m_device->setNixieTubeNumber (m_cClockTubes);
+        this->clock ();
+      }
+    }
+
+    m_configType = CMode::LastType;
+  }
+}
+

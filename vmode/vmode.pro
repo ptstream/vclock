@@ -27,7 +27,8 @@ SOURCES += \
     stopwatch.cpp \
     thermometer.cpp \
     timer.cpp \
-    clock.cpp
+    clock.cpp \
+    digittest.cpp
 
 HEADERS += \
     fastcounter.hpp \
@@ -35,4 +36,5 @@ HEADERS += \
     stopwatch.hpp \
     thermometer.hpp \
     timer.hpp \
-    clock.hpp
+    clock.hpp \
+    digittest.hpp

@@ -4,6 +4,7 @@
 #include "../vmode/fastcounter.hpp"
 #include "../vmode/thermometer.hpp"
 #include "../vmode/timer.hpp"
+#include "../vmode/digittest.hpp"
 #include <QMouseEvent>
 #include <QOpenGLTexture>
 #include <QDir>
@@ -197,6 +198,11 @@ void CNixie::setType (CMode::EType type, QVariant const & data)
         m_redrawTimer.start ();
         break;
 
+      case CMode::DigitTest :
+        m_mode = new CDigitTest ();
+        m_redrawTimer.start ();
+        break;
+
       case CMode::Thermometer :
         m_mode = new CThermometer (data.toBool ());
         m_redrawTimer.start ();
@@ -281,7 +287,7 @@ void CNixie::updateTubes ()
   }
 
   repaint ();
-  if (type == CMode::Clock)
+  if (type == CMode::Clock || type == CMode::DigitTest)
   {
     m_separator = !m_separator;
   }

@@ -15,7 +15,7 @@
     </message>
     <message>
         <location filename="../nixie/about.ui" line="54"/>
-        <source>Version 0.0.0- Copyright (C) 2018</source>
+        <source>Version 0.0.2- Copyright (C) 2018</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -173,7 +173,7 @@ QUALITÉ MARCHANDE ET ADAPTATION À UN USAGE PARTICULIER.</translation>
     </message>
     <message>
         <location filename="../nixie/alarmmanager.ui" line="537"/>
-        <location filename="../nixie/alarmmanager.cpp" line="360"/>
+        <location filename="../nixie/alarmmanager.cpp" line="334"/>
         <source>Save</source>
         <translation type="unfinished">Sauvegarder</translation>
     </message>
@@ -184,12 +184,12 @@ QUALITÉ MARCHANDE ET ADAPTATION À UN USAGE PARTICULIER.</translation>
         <translation type="unfinished">Annuler</translation>
     </message>
     <message>
-        <location filename="../nixie/alarmmanager.cpp" line="171"/>
+        <location filename="../nixie/alarmmanager.cpp" line="145"/>
         <source>Alarm</source>
         <translation type="unfinished">Alarme</translation>
     </message>
     <message>
-        <location filename="../nixie/alarmmanager.cpp" line="360"/>
+        <location filename="../nixie/alarmmanager.cpp" line="334"/>
         <source>Save and activate</source>
         <translation type="unfinished">Sauvegarder et activer</translation>
     </message>
@@ -336,37 +336,42 @@ Le code postal peut-être remplacé par l&apos;abréviation du pays (ex: France=
         <translation type="unfinished">Compteur rapide</translation>
     </message>
     <message>
-        <location filename="../nixie/menu.cpp" line="49"/>
+        <location filename="../nixie/menu.cpp" line="47"/>
+        <source>Test digits</source>
+        <translation type="unfinished">Test digits</translation>
+    </message>
+    <message>
+        <location filename="../nixie/menu.cpp" line="50"/>
         <source>Options</source>
         <translation type="unfinished">Options</translation>
     </message>
     <message>
-        <location filename="../nixie/menu.cpp" line="53"/>
+        <location filename="../nixie/menu.cpp" line="54"/>
         <source>24 hours</source>
         <translation type="unfinished">24 heures</translation>
     </message>
     <message>
-        <location filename="../nixie/menu.cpp" line="57"/>
+        <location filename="../nixie/menu.cpp" line="58"/>
         <source>Meteo</source>
         <translation type="unfinished">Météo</translation>
     </message>
     <message>
-        <location filename="../nixie/menu.cpp" line="72"/>
+        <location filename="../nixie/menu.cpp" line="73"/>
         <source>Automatic brightness</source>
         <translation type="unfinished">Luminosité automatique</translation>
     </message>
     <message>
-        <location filename="../nixie/menu.cpp" line="79"/>
+        <location filename="../nixie/menu.cpp" line="80"/>
         <source>below medium</source>
         <translation type="unfinished">En dessous de médium</translation>
     </message>
     <message>
-        <location filename="../nixie/menu.cpp" line="83"/>
+        <location filename="../nixie/menu.cpp" line="84"/>
         <source>Localisation</source>
         <translation type="unfinished">Localisation</translation>
     </message>
     <message>
-        <location filename="../nixie/menu.cpp" line="59"/>
+        <location filename="../nixie/menu.cpp" line="60"/>
         <source>Date</source>
         <translation type="unfinished">Date</translation>
     </message>
@@ -376,147 +381,147 @@ Le code postal peut-être remplacé par l&apos;abréviation du pays (ex: France=
         <translation type="unfinished">Minuteur</translation>
     </message>
     <message>
-        <location filename="../nixie/menu.cpp" line="50"/>
+        <location filename="../nixie/menu.cpp" line="51"/>
         <source>Display</source>
         <translation type="unfinished">Affichage</translation>
     </message>
     <message>
-        <location filename="../nixie/menu.cpp" line="60"/>
+        <location filename="../nixie/menu.cpp" line="61"/>
         <source>Table</source>
         <translation type="unfinished">Table</translation>
     </message>
     <message>
-        <location filename="../nixie/menu.cpp" line="61"/>
+        <location filename="../nixie/menu.cpp" line="62"/>
         <source>Pencil</source>
         <translation type="unfinished">Crayon</translation>
     </message>
     <message>
-        <location filename="../nixie/menu.cpp" line="62"/>
+        <location filename="../nixie/menu.cpp" line="63"/>
         <source>Player</source>
         <translation type="unfinished">Lecteur</translation>
     </message>
     <message>
-        <location filename="../nixie/menu.cpp" line="64"/>
+        <location filename="../nixie/menu.cpp" line="65"/>
         <source>Stop diaporama</source>
         <translation type="unfinished">Stop le diaporama</translation>
     </message>
     <message>
-        <location filename="../nixie/menu.cpp" line="65"/>
+        <location filename="../nixie/menu.cpp" line="66"/>
         <source>Uniform color</source>
         <translation type="unfinished">Couleur uniforme</translation>
     </message>
     <message>
-        <location filename="../nixie/menu.cpp" line="66"/>
+        <location filename="../nixie/menu.cpp" line="67"/>
         <source>Move</source>
         <translation type="unfinished">Déplacement</translation>
     </message>
     <message>
-        <location filename="../nixie/menu.cpp" line="54"/>
+        <location filename="../nixie/menu.cpp" line="55"/>
         <source>Celcius</source>
         <translation type="unfinished">Celcius</translation>
     </message>
     <message>
-        <location filename="../nixie/menu.cpp" line="56"/>
+        <location filename="../nixie/menu.cpp" line="57"/>
         <source>Show/Hide</source>
         <translation type="unfinished">Montrer/cacher</translation>
     </message>
     <message>
-        <location filename="../nixie/menu.cpp" line="76"/>
+        <location filename="../nixie/menu.cpp" line="77"/>
         <source>Hight</source>
         <translation type="unfinished">Haute</translation>
     </message>
     <message>
-        <location filename="../nixie/menu.cpp" line="78"/>
+        <location filename="../nixie/menu.cpp" line="79"/>
         <source>Medium</source>
         <translation type="unfinished">Moyenne</translation>
     </message>
     <message>
-        <location filename="../nixie/menu.cpp" line="80"/>
+        <location filename="../nixie/menu.cpp" line="81"/>
         <source>Low</source>
         <translation type="unfinished">Basse</translation>
     </message>
     <message>
-        <location filename="../nixie/menu.cpp" line="69"/>
+        <location filename="../nixie/menu.cpp" line="70"/>
         <source>Brightness</source>
         <translation type="unfinished">Luminosité</translation>
     </message>
     <message>
-        <location filename="../nixie/menu.cpp" line="77"/>
+        <location filename="../nixie/menu.cpp" line="78"/>
         <source>Above medium</source>
         <translation type="unfinished">Au dessus de médium</translation>
     </message>
     <message>
-        <location filename="../nixie/menu.cpp" line="84"/>
+        <location filename="../nixie/menu.cpp" line="85"/>
         <source>Alarms</source>
         <translation type="unfinished">Alarmes</translation>
     </message>
     <message>
-        <location filename="../nixie/menu.cpp" line="86"/>
+        <location filename="../nixie/menu.cpp" line="87"/>
         <source>About</source>
         <translation type="unfinished">À propos</translation>
     </message>
     <message>
-        <location filename="../nixie/menu.cpp" line="88"/>
+        <location filename="../nixie/menu.cpp" line="89"/>
         <source>Minimize</source>
         <translation type="unfinished">Minimiser</translation>
     </message>
     <message>
-        <location filename="../nixie/menu.cpp" line="89"/>
+        <location filename="../nixie/menu.cpp" line="90"/>
         <source>Close</source>
         <translation type="unfinished">Fermer</translation>
     </message>
     <message>
-        <location filename="../nixie/menu.cpp" line="93"/>
+        <location filename="../nixie/menu.cpp" line="94"/>
         <source>Halt RPI</source>
         <translation type="unfinished">Arrêter RPI</translation>
     </message>
     <message>
-        <location filename="../nixie/menu.cpp" line="161"/>
+        <location filename="../nixie/menu.cpp" line="162"/>
         <source>Disable</source>
         <translation type="unfinished">Désactiver</translation>
     </message>
     <message>
-        <location filename="../nixie/menu.cpp" line="162"/>
+        <location filename="../nixie/menu.cpp" line="163"/>
         <source>15mn</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../nixie/menu.cpp" line="163"/>
+        <location filename="../nixie/menu.cpp" line="164"/>
         <source>30mn</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../nixie/menu.cpp" line="164"/>
+        <location filename="../nixie/menu.cpp" line="165"/>
         <source>45mn</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../nixie/menu.cpp" line="165"/>
+        <location filename="../nixie/menu.cpp" line="166"/>
         <source>1h</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../nixie/menu.cpp" line="166"/>
+        <location filename="../nixie/menu.cpp" line="167"/>
         <source>2h</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../nixie/menu.cpp" line="167"/>
+        <location filename="../nixie/menu.cpp" line="168"/>
         <source>3h</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../nixie/menu.cpp" line="168"/>
+        <location filename="../nixie/menu.cpp" line="169"/>
         <source>4h</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../nixie/menu.cpp" line="52"/>
+        <location filename="../nixie/menu.cpp" line="53"/>
         <source>6 tubes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../nixie/menu.cpp" line="58"/>
+        <location filename="../nixie/menu.cpp" line="59"/>
         <source>Forecasts</source>
         <translation type="unfinished">Prévisions</translation>
     </message>
@@ -524,6 +529,16 @@ Le code postal peut-être remplacé par l&apos;abréviation du pays (ex: France=
         <location filename="../nixie/audioslots.cpp" line="73"/>
         <source>No webradio</source>
         <translation type="unfinished">Pas de webradio</translation>
+    </message>
+    <message>
+        <location filename="../nixie/weatherslots.cpp" line="53"/>
+        <source>Searching for location</source>
+        <translation type="unfinished">Recherche de lieu</translation>
+    </message>
+    <message>
+        <location filename="../nixie/weatherslots.cpp" line="61"/>
+        <source>Searching for </source>
+        <translation type="unfinished">Recherche pour</translation>
     </message>
 </context>
 <context>

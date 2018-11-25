@@ -1,6 +1,11 @@
 #include <mode.hpp>
 #include <QTime>
 
+CMode::CMode (EType type) : m_type (type)
+{
+  updateInterval ();
+}
+
 int CMode::digits (QTime const & time, bool h24)
 {
   int   value       = 0;
@@ -39,15 +44,37 @@ void CMode::updateInterval ()
   m_interval = interval (m_type);
 }
 
-
 int CMode::interval (EType type)
 {
-  int interval[] = { 1000,  //Clock
-                     0,     //FastCounter
-                     50,    //Stopwatch
-                     5000,  //Thermometer
-                     50,    //Timer
-                   };
-  return interval[type];
+  int interval;
+  switch (type)
+  {
+    case Clock :
+      interval = 1000;
+      break;
+
+    case FastCounter :
+      interval = 0;
+      break;
+
+    case Stopwatch :
+    case Timer :
+      interval = 50;
+      break;
+
+    case Thermometer :
+      interval = 5000;
+      break;
+
+    case DigitTest :
+      interval = 125;
+      break;
+
+    default :
+      interval = 1000;
+      break;
+  }
+
+  return interval;
 }
 

@@ -44,6 +44,7 @@ CMainWindow::CMainWindow (QWidget *parent) : QMainWindow (parent),  ui (new Ui::
   icon.addPixmap (QPixmap (":/icons/sleepingOff.png"), QIcon::Normal);
   icon.addPixmap (QPixmap (":/icons/sleepingDisable.png"), QIcon::Disabled);
   ui->m_sleeping->setIcon (icon);
+  digitTest ();
   //  QApplication::setOverrideCursor (Qt::BlankCursor);
 }
 
@@ -611,6 +612,20 @@ void CMainWindow::setFontFamily (QString const & family)
     font.setFamily (family);
     label->setFont (font);
   }
+}
+
+void CMainWindow::setSimpleMode (CMode::EType type)
+{
+  updateClockButtons ();
+  int cTubes = ui->m_device->nixieTubeNumber ();
+  if (cTubes != 4 && cTubes != 6)
+  {
+    ui->m_device->setNixieTubeNumber (m_cClockTubes);
+    ui->m_device->changeVbo ();
+  }
+
+  ui->m_device->setType (type);
+  ui->m_frameCount->clear ();
 }
 
 

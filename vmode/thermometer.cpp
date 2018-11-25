@@ -12,7 +12,7 @@ CThermometer::~CThermometer ()
 
 int CThermometer::digits () const
 {
-  int value = static_cast<int>(VTOOLS_INVALID_TEMPERATURE); // Change -9999.9 in -9999 is important.
+  auto value = static_cast<int>(VTOOLS_INVALID_TEMPERATURE); // Change -9999.9 in -9999 is important.
   if (m_sensor != nullptr)
   {
     float f = m_sensor->value ();
