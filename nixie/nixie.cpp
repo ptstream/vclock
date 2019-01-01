@@ -400,13 +400,16 @@ void CNixie::allocateVbo ()
   {
     m_cVertices[i] = mesh.size () / 6;
     auto size      = static_cast<int>(byteSize (m_cVertices[i]));
-    m_vbos[i].bind ();
-    m_vbos[i].allocate (size);
-    m_vbos[i].write (0, mesh.constData (), size);
-    m_vbos[i].release ();
-    m_validVbos[i] = true;
-    cVertices     += m_cVertices[i];
-    cTriangles    += m_cVertices[i] == 4 ? 2 : m_cVertices[i] / 3;
+    if (m_vbos[i].bind ())
+    {
+      m_vbos[i].allocate (size);
+      m_vbos[i].write (0, mesh.constData (), size);
+      m_vbos[i].release ();
+      m_validVbos[i] = true;
+      cVertices     += m_cVertices[i];
+      cTriangles    += m_cVertices[i] == 4 ? 2 : m_cVertices[i] / 3;
+    }
+
     mesh.clear ();
   }
 
@@ -438,13 +441,16 @@ void CNixie::allocateVbo ()
       {
         m_cVertices[i] = mesh.size () / 6;
         auto size      = static_cast<int>(byteSize (m_cVertices[i]));
-        m_vbos[i].bind ();
-        m_vbos[i].allocate (size);
-        m_vbos[i].write (0, mesh.constData (), size);
-        m_vbos[i].release ();
-        m_validVbos[i] = true;
-        cVertices     += m_cVertices[i];
-        cTriangles    += m_cVertices[i] == 4 ? 2 : m_cVertices[i] / 3;
+        if (m_vbos[i].bind ())
+        {
+          m_vbos[i].allocate (size);
+          m_vbos[i].write (0, mesh.constData (), size);
+          m_vbos[i].release ();
+          m_validVbos[i] = true;
+          cVertices     += m_cVertices[i];
+          cTriangles    += m_cVertices[i] == 4 ? 2 : m_cVertices[i] / 3;
+        }
+
         mesh.clear ();
       }
     }
