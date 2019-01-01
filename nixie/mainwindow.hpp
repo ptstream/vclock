@@ -334,6 +334,7 @@ private:
   bool m_celcius = true; //!< Temperature units.
   float m_menuFontCoef = 0.0f;
   CMode::EType m_configType = CMode::Clock;
+  QTimer m_startupTimer;
 
   // Web radios
   int m_stationNameLength = 60; //!< Maximum station name length.

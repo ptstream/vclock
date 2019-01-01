@@ -44,7 +44,11 @@ CMainWindow::CMainWindow (QWidget *parent) : QMainWindow (parent),  ui (new Ui::
   icon.addPixmap (QPixmap (":/icons/sleepingOff.png"), QIcon::Normal);
   icon.addPixmap (QPixmap (":/icons/sleepingDisable.png"), QIcon::Disabled);
   ui->m_sleeping->setIcon (icon);
-  digitTest ();
+
+  // This part is important for Windows OpenGL. It is not possible to allocate VBO in this constructor.
+  connect (&m_startupTimer, &QTimer::timeout, this, &CMainWindow::digitTest);
+  m_startupTimer.setSingleShot (true);
+  m_startupTimer.start (250);
   //  QApplication::setOverrideCursor (Qt::BlankCursor);
 }
 

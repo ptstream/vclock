@@ -589,6 +589,7 @@ void CMainWindow::applyConfig ()
 
   ui->m_device->setDisplay (tubes.m_displayType);
   m_cClockTubes = tubes.m_cClockTubes;
+  ui->m_device->setNixieTubeNumber (m_cClockTubes);
   ui->m_device->setBackgroundUniformColor (tubes.m_backgroundUniformColor);
   ui->m_device->setMoodLightPositions (tubes.m_moodLightPositions.x (), tubes.m_moodLightPositions.y (), tubes.m_moodLightPositions.z ());
   ui->m_device->setMoodLightIntensities (tubes.m_moodLightIntensities.x (), tubes.m_moodLightIntensities.y (), tubes.m_moodLightIntensities.z ());
