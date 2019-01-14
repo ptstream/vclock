@@ -1,3 +1,16 @@
+
+
+****************************************************************************************************************
+                                                     **Information**.
+Unfortunatlly the weather part of this application fails. It was based on http://query.yahooapis.com.
+It is a problem with the Yahoo servers. Yahoo Developer Network said in a tweet :
+
+**"On Jan. 3, 2019, YQL service at http://query.yahooapis.com will be retired. YQL based services that use http://query.yahooapis.com, 
+including users of http://datatables.org, will no longer operate."**
+
+I will look for a replacement.
+****************************************************************************************************************
+
 Like me, you like the look of old digital clocks but you find that they are often expensive,
 have only very few features, have a limited life and never on time, so you will love this clock.
 
