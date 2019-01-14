@@ -1,7 +1,7 @@
 
 
 ****************************************************************************************************************
-                                                     **Information**.
+                                                     Information
 Unfortunatlly the weather part of this application fails. It was based on http://query.yahooapis.com.
 It is a problem with the Yahoo servers. Yahoo Developer Network said in a tweet :
 
