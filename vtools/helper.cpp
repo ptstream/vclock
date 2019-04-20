@@ -17,7 +17,7 @@ QString VTOOLSSHARED_EXPORT applicationFolder ()
   return fileInfo.absolutePath ();
 }
 
-QString VTOOLSSHARED_EXPORT appDataLocation ()
+QString appDataLocation ()
 {
   return QStandardPaths::writableLocation (QStandardPaths::AppDataLocation);
 }
@@ -98,7 +98,7 @@ QString VTOOLSSHARED_EXPORT formatItem (int i)
   return QString ("%1").arg (i, 2, 10, QLatin1Char ('0'));
 }
 
-QObject* VTOOLSSHARED_EXPORT loadPlugin (QString const & name, QByteArray* version)
+QObject VTOOLSSHARED_EXPORT * loadPlugin (QString const & name, QByteArray* version)
 {
   QDir pluginsDir = QDir (qApp->applicationDirPath ());
   pluginsDir.cd ("plugins");

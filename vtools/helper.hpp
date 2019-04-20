@@ -14,7 +14,7 @@ class QNetworkAccessManager;
 #endif
 
 /*! Returns the application folder. In fact the folder of the excecutable file. */
-QString applicationFolder ();
+QString VTOOLSSHARED_EXPORT applicationFolder ();
 
 /*! Returns the application data folder. */
 QString VTOOLSSHARED_EXPORT appDataLocation ();
@@ -32,7 +32,7 @@ void VTOOLSSHARED_EXPORT removeNumericalSettingKeys (QSettings& settings);
 QString VTOOLSSHARED_EXPORT formatItem (int i);
 
 /*! Loads an returns a plugin after version verification. */
-QObject* VTOOLSSHARED_EXPORT loadPlugin (QString const & name, QByteArray* version = nullptr);
+QObject VTOOLSSHARED_EXPORT * loadPlugin (QString const & name, QByteArray* version = nullptr);
 
 /*! Unloads a plugin. */
 void VTOOLSSHARED_EXPORT unloadPlugin (QString const & name);
