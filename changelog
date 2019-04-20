@@ -1,3 +1,9 @@
+version 0.0.3
+- Improvements
+  * Build with Qt 5.12.3.
+  * Tested with mingw73 64 bits
+  * Little changes to compile with Visual Studio 2017.
+
 version 0.0.2
 - Improvements
   * Add digit test at startup and in the menu. Just for the fun.
