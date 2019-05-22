@@ -67,6 +67,9 @@ Build Nixie needs to install QT5. It has been tested from:
 	
     It has been tested under Raspbian Stretch with desktop on a Raspberry PI3 and using the official 7” screen.
 	
+Remark:
+- With linux systems, you must change the autorisations of **dep.h**. In a terminal, in the folder **.../vclock/nixie**, enter **chmod +x dep.sh** before build nixie progect.	
+	
 To test it, some installers are avalaible at: https://drive.google.com/open?id=1-NYaP9FZ8btiqm2BfRxURVEukjmCO6SI
 Please see user-manual.pdf before installing Nixie.
 
