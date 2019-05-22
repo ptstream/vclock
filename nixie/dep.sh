@@ -31,4 +31,7 @@ cp $1/stl/*.stl $2/stl
 cp $1/images/*.* $2/images
 cp $1/diaporama/*.* $2/diaporama
 cp $1/ringtones/*.* $2/ringtones
+if [ -f $1/../languages/*.qm ]
+then
 cp $1/../languages/*.qm $2/languages
+fi
