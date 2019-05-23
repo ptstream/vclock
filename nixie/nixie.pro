@@ -91,4 +91,9 @@ unix {
 QMAKE_POST_LINK = $$_PRO_FILE_PWD_/dep.sh $$_PRO_FILE_PWD_ $$OUT_PWD
 }
 
+#Copy files needed.
+macx {
+QMAKE_POST_LINK=$$_PRO_FILE_PWD_/dep.sh $$_PRO_FILE_PWD_ $$OUT_PWD/nixie.app/Contents/MacOS
+}
 
+macx:ICON=$$PWD/icons/nixie64.icns
