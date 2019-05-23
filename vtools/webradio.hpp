@@ -93,7 +93,6 @@ private :
   int m_currentIndex = -1; //!< The current station index.
   bool m_mp3 = false; //!< Keep mp3 station only.
   QVector<CStation> m_stations; //!< The list of stations.
-  CWebRadiosInterface* m_provider = nullptr; //!< The webradios plugin.
 };
 
 #endif // WEBRADIO_HPP

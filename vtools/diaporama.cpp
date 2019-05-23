@@ -78,8 +78,14 @@ QImage CDiaporama::applyAttenuation (QImage image, float attenuation)
 {
   if (attenuation != 1.0f)
   {
-    uchar* bits = image.bits ();
-    for (int i = 0, count = image.byteCount (); i < count; i += 4)
+    uchar*    bits  = image.bits ();
+    qsizetype count = image.
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+            sizeInBytes ();
+#else
+            byteCount ();
+#endif
+    for (qsizetype  i = 0; i < count; i += 4)
     {
       bits[i]     /= attenuation;
       bits[i + 1] /= attenuation;
